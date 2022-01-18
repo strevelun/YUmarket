@@ -9,4 +9,9 @@
 
     <string name="cannot_load_address_info">위치 정보를 불러올 수 없습니다.</string>
 
+<!-- HomeMainFragment Strings -->
+    <string name="new_sale_item">새로운 할인상품</string>
+    <string name="nearby_market">가까운 동네마켓</string>
+    <string name="show_more">더보기 ></string>
+
 </resources>

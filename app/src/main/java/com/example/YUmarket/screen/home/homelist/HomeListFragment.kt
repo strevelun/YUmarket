@@ -28,9 +28,9 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
             listOf(),
             viewModel,
             object: HomeListListener {
-                override fun onClickItem(listModel: HomeListModel) {
+                override fun onClickItem(model: HomeListModel) {
                     // TODO change to detail activity
-                    showMessage(listModel.toString())
+                    showMessage(model.toString())
                 }
             }
         )

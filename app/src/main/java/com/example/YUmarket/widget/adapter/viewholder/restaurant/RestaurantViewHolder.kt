@@ -10,19 +10,19 @@ import com.example.YUmarket.widget.adapter.viewholder.ModelViewHolder
 class RestaurantViewHolder(
     private val binding: ViewholderRestaurantBinding,
     viewModel: BaseViewModel,
-    // TODO res provider
+    // TODO add res provider
 ) : ModelViewHolder<HomeListModel>(binding, viewModel) {
     override fun reset() = Unit
 
-    override fun bindData(listModel: HomeListModel) {
-        super.bindData(listModel)
-        binding.restaurantTitle.text = listModel.title
+    override fun bindData(model: HomeListModel) {
+        super.bindData(model)
+        binding.restaurantTitle.text = model.title
     }
 
-    override fun bindViews(listModel: HomeListModel, listener: AdapterListener) {
+    override fun bindViews(model: HomeListModel, listener: AdapterListener) {
         if (listener is HomeListListener) {
             binding.root.setOnClickListener {
-                listener.onClickItem(listModel)
+                listener.onClickItem(model)
             }
         }
     }

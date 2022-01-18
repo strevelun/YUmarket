@@ -7,6 +7,7 @@
     <string name="service">서비스업종</string>
     <string name="fashion">패션의류</string>
     <string name="accessory">패션잡화</string>
+    <string name="etc">기타/마켓</string>
 
     <string name="all_type">동네마켓</string>
     <string name="food_type">식/음료</string>

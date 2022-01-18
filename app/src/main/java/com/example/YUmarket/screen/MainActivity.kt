@@ -14,7 +14,7 @@ import com.example.YUmarket.R
 import com.example.YUmarket.data.entity.location.LocationLatLngEntity
 import com.example.YUmarket.databinding.ActivityMainBinding
 import com.example.YUmarket.screen.base.BaseActivity
-import com.example.YUmarket.screen.home.HomeFragment
+import com.example.YUmarket.screen.home.homemain.HomeMainFragment
 import com.example.YUmarket.screen.like.LikeFragment
 import com.example.YUmarket.screen.map.MapFragment
 import com.example.YUmarket.screen.myinfo.MyInfoFragment
@@ -22,17 +22,19 @@ import com.example.YUmarket.screen.orderlist.OrderListFragment
 import com.example.YUmarket.util.LocationData
 import com.example.YUmarket.util.LocationState
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity
     : BaseActivity<MainViewModel, ActivityMainBinding>(),
-    BottomNavigationView.OnNavigationItemSelectedListener {
+    NavigationBarView.OnItemSelectedListener {
 
     companion object {
         val locationPermissions = arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION
         )
+
     }
 
     private val permissionLauncher =
@@ -63,7 +65,6 @@ class MainActivity
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
     override fun observeData() = with(binding) {
-//        viewModel.mainStateLiveData
             LocationData.locationStateLiveData.observe(this@MainActivity) {
             when (it) {
                 is LocationState.Uninitialized -> {
@@ -90,7 +91,7 @@ class MainActivity
         bottomNav.setOnItemSelectedListener(this@MainActivity)
 
         // TODO show home fragment
-        showFragment(HomeFragment.newInstance(), HomeFragment.TAG)
+        showFragment(HomeMainFragment.newInstance(), HomeMainFragment.TAG)
 
         locationTitleTextView.setOnClickListener {
             viewModel.getMapSearchInfo()?.let { mapInfo ->
@@ -123,7 +124,7 @@ class MainActivity
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.home -> {
-                showFragment(HomeFragment.newInstance(), HomeFragment.TAG)
+                showFragment(HomeMainFragment.newInstance(), HomeMainFragment.TAG)
                 return true
             }
 
