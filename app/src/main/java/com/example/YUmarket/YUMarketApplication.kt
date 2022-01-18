@@ -8,7 +8,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
-class MyApplication : Application() {
+class YUMarketApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -16,7 +16,7 @@ class MyApplication : Application() {
 
         startKoin {
             androidLogger(Level.ERROR)
-            androidContext(this@MyApplication)
+            androidContext(this@YUMarketApplication)
             modules(appModule)
         }
     }
