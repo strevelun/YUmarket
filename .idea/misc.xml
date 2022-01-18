@@ -20,6 +20,12 @@
         <entry key="..\:/Users/StrangeCake/AndroidStudioProjects/MyApplication23/app/src/main/res/layout/fragment_restaurant_list.xml" value="0.264" />
         <entry key="..\:/Users/StrangeCake/AndroidStudioProjects/MyApplication23/app/src/main/res/layout/viewholder_restaurant.xml" value="0.4" />
         <entry key="..\:/Users/StrangeCake/AndroidStudioProjects/MyApplication23/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.4" />
+        <entry key="app/src/main/res/drawable/home_item_image_information_background.xml" value="0.22447916666666667" />
+        <entry key="app/src/main/res/drawable/viewholder_town_market_closed_shape.xml" value="0.22447916666666667" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.20744245003503456" />
+        <entry key="app/src/main/res/layout/fragment_home_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/viewholder_home_item.xml" value="0.20833333333333334" />
+        <entry key="app/src/main/res/layout/viewholder_town_market.xml" value="0.20833333333333334" />
       </map>
     </option>
   </component>

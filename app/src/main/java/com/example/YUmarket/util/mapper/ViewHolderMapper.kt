@@ -7,8 +7,8 @@ import com.example.YUmarket.model.CellType
 import com.example.YUmarket.model.Model
 import com.example.YUmarket.screen.base.BaseViewModel
 import com.example.YUmarket.widget.adapter.viewholder.ModelViewHolder
-import com.example.YUmarket.widget.adapter.viewholder.restaurant.RestaurantViewHolder
 
+// 임시 비활성화
 object ViewHolderMapper {
     @Suppress("UNCHECKED_CAST")
     fun <M : Model> map(
@@ -21,20 +21,8 @@ object ViewHolderMapper {
         val inflater = LayoutInflater.from(parent.context)
 
         return when (type) {
-            CellType.RESTAURANT_CELL -> {
-                RestaurantViewHolder(
-                    ViewholderRestaurantBinding.inflate(inflater),
-                    viewModel,
-                )
-            }
-
-            CellType.HOME_CELL -> {
-                RestaurantViewHolder(
-                    ViewholderRestaurantBinding.inflate(inflater),
-                    viewModel,
-                )
-            }
+            CellType.RESTAURANT_CELL -> Unit
+            CellType.HOME_CELL -> Unit
         } as ModelViewHolder<M>
-
     }
 }
