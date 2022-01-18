@@ -8,6 +8,8 @@ data class HomeListModel(
     override val id: Long,
     val title: String,
     val category: HomeCategory,
+    val isMarketOpen: Boolean,
+    val distance: Float,
     // TODO add more
     override val type: CellType = CellType.HOME_CELL,
 ) : Model(id, type)

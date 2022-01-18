@@ -2,11 +2,13 @@ package com.example.YUmarket.util.mapper
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.example.YUmarket.databinding.ViewholderNearbyMarketBinding
 import com.example.YUmarket.databinding.ViewholderRestaurantBinding
 import com.example.YUmarket.model.CellType
 import com.example.YUmarket.model.Model
 import com.example.YUmarket.screen.base.BaseViewModel
 import com.example.YUmarket.widget.adapter.viewholder.ModelViewHolder
+import com.example.YUmarket.widget.adapter.viewholder.homemain.NearbyMarketViewHolder
 import com.example.YUmarket.widget.adapter.viewholder.restaurant.RestaurantViewHolder
 
 object ViewHolderMapper {
@@ -29,8 +31,8 @@ object ViewHolderMapper {
             }
 
             CellType.HOME_CELL -> {
-                RestaurantViewHolder(
-                    ViewholderRestaurantBinding.inflate(inflater),
+                NearbyMarketViewHolder(
+                    ViewholderNearbyMarketBinding.inflate(inflater),
                     viewModel,
                 )
             }

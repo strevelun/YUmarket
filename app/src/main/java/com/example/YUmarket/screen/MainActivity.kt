@@ -89,10 +89,9 @@ class MainActivity
     override fun initViews() = with(binding) {
         bottomNav.setOnItemSelectedListener(this@MainActivity)
 
-        // TODO show home fragment
         showFragment(HomeMainFragment.newInstance(), HomeMainFragment.TAG)
 
-        locationTitleTextView.setOnClickListener {
+//        locationTitleTextView.setOnClickListener {
 //            viewModel.getMapSearchInfo()?.let { mapInfo ->
 //                changeLocationLauncher.launch(
 //                    MyLocationActivity.newIntent(
@@ -100,10 +99,7 @@ class MainActivity
 //                    )
 //                )
 //            }
-        }
-
-        // TODO
-//        getMyLocation()
+//        }
     }
 
     private fun showFragment(fragment: Fragment, tag: String) {

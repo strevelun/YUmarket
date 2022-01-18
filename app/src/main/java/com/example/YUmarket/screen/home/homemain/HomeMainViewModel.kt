@@ -32,8 +32,8 @@ class HomeMainViewModel(
 
         // get list after get location data
         if (LocationData.locationStateLiveData.value is LocationState.Success) {
-            // TODO sort by distance
-            _marketData.value = homeRepository.getList(HomeCategory.ALL)
+            // sorted by distance
+            _marketData.value = homeRepository.getList(HomeCategory.ALL).sortedBy { it.distance }
         }
     }
 }
