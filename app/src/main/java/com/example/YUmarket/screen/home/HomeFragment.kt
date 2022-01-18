@@ -3,8 +3,8 @@ package com.example.YUmarket.screen.home
 
 import androidx.core.view.isVisible
 import com.example.YUmarket.databinding.FragmentHomeBinding
+import com.example.YUmarket.model.homelist.category.HomeListCategory
 import com.example.YUmarket.screen.base.BaseFragment
-import com.example.YUmarket.screen.home.homelist.HomeCategory
 import com.example.YUmarket.screen.home.homelist.HomeListFragment
 import com.example.YUmarket.util.LocationData
 import com.example.YUmarket.util.LocationState
@@ -27,7 +27,6 @@ class HomeFragment
     }
 
     override fun observeData() = with(binding) {
-//        initViewPager()
         LocationData.locationStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is LocationState.Success -> {
@@ -41,9 +40,9 @@ class HomeFragment
         orderChipGroup.isVisible = true
 
         if (::viewPagerAdapter.isInitialized.not()) {
-            val homeCategory = HomeCategory.values()
+            val homeListCategories = HomeListCategory.values()
 
-            val homeListFragmentList = homeCategory.map {
+            val homeListFragmentList = homeListCategories.map {
 //                RestaurantListFragment.newInstance(it, locationLatLng)
                 HomeListFragment.newInstance(it)
             }
@@ -54,10 +53,10 @@ class HomeFragment
             )
             viewPager.adapter = viewPagerAdapter
 
-            viewPager.offscreenPageLimit = homeCategory.size
+            viewPager.offscreenPageLimit = homeListCategories.size
 
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-                tab.setText(HomeCategory.values()[position].categoryNameId)
+                tab.setText(homeListCategories[position].categoryNameId)
             }.attach()
         }
 
