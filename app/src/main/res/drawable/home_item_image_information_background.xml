@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- HomeListFragment의 ItemImage 하단에 적용할 InformationContainer에 적용하는 Background resource -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <gradient android:startColor="#33000000"
+        android:endColor="#99000000"
+        android:angle="270"/>
+
+</shape>

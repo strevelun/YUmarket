@@ -15,22 +15,37 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
     override fun getViewBinding(): FragmentHomeListBinding =
         FragmentHomeListBinding.inflate(layoutInflater)
 
-    private val homeCategory: HomeCategory by lazy {
-        arguments?.getSerializable(HOME_CATEGORY_KEY) as HomeCategory
+    private val homeListCategory: HomeListCategory by lazy {
+        arguments?.getSerializable(HOME_CATEGORY_KEY) as HomeListCategory
     }
 
     override val viewModel by viewModel<HomeListViewModel> {
-        parametersOf(homeCategory)
+        parametersOf(homeListCategory)
     }
 
     private val adapter by lazy {
-        ModelRecyclerAdapter<HomeListModel, HomeListViewModel>(
-            listOf(),
-            viewModel,
-            object: HomeListListener {
-                override fun onClickItem(model: HomeListModel) {
-                    // TODO change to detail activity
-                    showMessage(model.toString())
+        HomeModelRecyclerAdapter<HomeListModel, HomeListViewModel>(
+            listOf(), viewModel, resourcesProvider,
+            adapterListener = when (homeListCategory) {
+                HomeListCategory.TOWN_MARKET -> {
+                    object : TownMarketListener {
+                        override fun onClickItem(townMarketModel: TownMarketModel) = Unit
+                    }
+                }
+
+                else -> {
+                    object : HomeItemListener {
+                        override fun onClickItem(item: HomeItemModel) {
+                            // TODO startActivity
+                            when(homeListCategory) {
+                                HomeListCategory.FOOD -> Toast.makeText(requireContext(), "Food!", Toast.LENGTH_SHORT).show()
+                                HomeListCategory.MART -> Toast.makeText(requireContext(), "Mart!", Toast.LENGTH_SHORT).show()
+                                HomeListCategory.SERVICE -> Toast.makeText(requireContext(), "Service!", Toast.LENGTH_SHORT).show()
+                                HomeListCategory.FASHION-> Toast.makeText(requireContext(), "Fashion!", Toast.LENGTH_SHORT).show()
+                                HomeListCategory.ACCESSORY -> Toast.makeText(requireContext(), "Accessory!", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
                 }
             }
         )

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="all">동네마켓</string>
+    <string name="food">식/음료</string>
+    <string name="mart">편의점/마트</string>
+    <string name="service">서비스업종</string>
+    <string name="fashion">패션의류</string>
+    <string name="accessory">패션잡화</string>
+    <string name="etc">그외/마켓</string>
+
+    <string name="all_type">TOWN_MARKET</string>
+    <string name="food_type">FOOD_BEVERAGE</string>
+    <string name="mart_type">MART</string>
+    <string name="service_type">SERVICE</string>
+    <string name="fashion_type">FASHION</string>
+    <string name="accessory_type">ACCESSORY</string>
+    <string name="etc_type">ETC</string>
+
+</resources>
