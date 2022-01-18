@@ -14,7 +14,7 @@ import com.example.YUmarket.widget.adapter.viewholder.home.HomeModelViewHolder
 import com.example.YUmarket.widget.adapter.viewholder.home.TownMarketViewHolder
 
 /**
- * HomeListViewHolder를 homeListCategory에 따라 분기하여 리턴해주는 mapper class
+ * HomeListViewHolder를 homeListCategory에 따라 분기하여 리턴해주는 mapper class.
  * @author Doyeop Kim (main),
  * Geonwoo Kim, Heetae Heo, Namjin Jeong, Eunho Bae (sub)
  * @since 2022/01/18
