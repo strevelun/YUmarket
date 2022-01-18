@@ -17,7 +17,6 @@ enum class HomeListCategory(
     @StringRes val categoryTypeId: Int
 ) {
     TOWN_MARKET(R.string.all, R.string.all_type),
-    ALL(R.string.all, R.string.all_type),
     FOOD(R.string.food, R.string.food_type),
     MART(R.string.mart, R.string.mart_type),
     SERVICE(R.string.service, R.string.service_type),

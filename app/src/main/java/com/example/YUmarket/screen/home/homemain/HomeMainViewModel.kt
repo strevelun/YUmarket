@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.YUmarket.data.repository.restaurant.HomeRepository
 import com.example.YUmarket.model.homelist.HomeListModel
+import com.example.YUmarket.model.homelist.TownMarketModel
 import com.example.YUmarket.screen.base.BaseViewModel
-import com.example.YUmarket.screen.home.homelist.HomeCategory
 import com.example.YUmarket.util.LocationData
 import com.example.YUmarket.util.LocationState
 import kotlinx.coroutines.Job
@@ -25,15 +25,15 @@ class HomeMainViewModel(
 ) : BaseViewModel() {
 
     // TODO 22.01.18 add State?
-    private val _marketData = MutableLiveData<List<HomeListModel>>()
-    val marketData: LiveData<List<HomeListModel>> = _marketData
+    private val _marketData = MutableLiveData<List<TownMarketModel>>()
+    val marketData: LiveData<List<TownMarketModel>> = _marketData
 
     override fun fetchData(): Job = viewModelScope.launch {
 
         // get list after get location data
         if (LocationData.locationStateLiveData.value is LocationState.Success) {
             // sorted by distance
-            _marketData.value = homeRepository.getList(HomeCategory.ALL).sortedBy { it.distance }
+            _marketData.value = homeRepository.getAllMarketList().sortedBy { it.distance }
         }
     }
 }

@@ -15,25 +15,47 @@ import com.example.YUmarket.model.homelist.category.HomeListDetailCategory
 class DefaultHomeRepository : HomeRepository {
     override fun getAllMarketList(): List<TownMarketModel> {
         // Mocking Data
+        // 22.01.18 거리 추가 by 정남진
         val mockList = listOf(
             TownMarketModel(
-                0, "쥬얼리 샵", true, LocationLatLngEntity(128.0, 36.0), "https://picsum.photos/200"
+                0,
+                "쥬얼리 샵",
+                true,
+                LocationLatLngEntity(128.0, 36.0),
+                "https://picsum.photos/200",
+                0.11f
             ),
             TownMarketModel(
-                1, "영남대 옷가게", true, LocationLatLngEntity(128.0, 36.0), "https://picsum.photos/200"
+                1,
+                "영남대 옷가게",
+                true,
+                LocationLatLngEntity(128.0, 36.0),
+                "https://picsum.photos/200",
+                0.22f
             ),
             TownMarketModel(
-                2, "피자스쿨 영남대점", true, LocationLatLngEntity(128.0, 36.0), "https://picsum.photos/200"
+                2,
+                "피자스쿨 영남대점",
+                true,
+                LocationLatLngEntity(128.0, 36.0),
+                "https://picsum.photos/200",
+                0.33f
             ),
             TownMarketModel(
-                3, "빅마트", false, LocationLatLngEntity(128.0, 36.0), "https://picsum.photos/200"
+                3,
+                "빅마트",
+                false,
+                LocationLatLngEntity(128.0, 36.0),
+                "https://picsum.photos/200",
+                0.44f
             ),
             TownMarketModel(
                 4,
                 "롯데리아 영남대 DT",
                 false,
                 LocationLatLngEntity(128.0, 36.0),
-                "https://picsum.photos/200"
+                "https://picsum.photos/200",
+                0.10f
             )
         )
 
@@ -53,7 +75,8 @@ class DefaultHomeRepository : HomeRepository {
                         "롯데리아 영남대 DT",
                         false,
                         LocationLatLngEntity(128.0, 36.0),
-                        "https://picsum.photos/200"
+                        "https://picsum.photos/200",
+                        0.11f
                     ),
                     "폴더버거",
                     5300,
@@ -72,7 +95,8 @@ class DefaultHomeRepository : HomeRepository {
                         "롯데리아 영남대 DT",
                         false,
                         LocationLatLngEntity(128.0, 36.0),
-                        "https://picsum.photos/200"
+                        "https://picsum.photos/200",
+                        0.11f
                     ),
                     "핫크리스피 버거",
                     4800,
@@ -91,7 +115,8 @@ class DefaultHomeRepository : HomeRepository {
                         "롯데리아 영남대 DT",
                         false,
                         LocationLatLngEntity(128.0, 36.0),
-                        "https://picsum.photos/200"
+                        "https://picsum.photos/200",
+                        0.11f
                     ),
                     "불고기버거",
                     3800,
@@ -113,7 +138,8 @@ class DefaultHomeRepository : HomeRepository {
                         "빅마트",
                         true,
                         LocationLatLngEntity(128.0, 36.0),
-                        "https://picsum.photos/200"
+                        "https://picsum.photos/200",
+                        0.11f
                     ),
                     "초코송이",
                     1500,
@@ -132,7 +158,8 @@ class DefaultHomeRepository : HomeRepository {
                         "빅마트",
                         true,
                         LocationLatLngEntity(128.0, 36.0),
-                        "https://picsum.photos/200"
+                        "https://picsum.photos/200",
+                        0.11f
                     ),
                     "샤프란",
                     4000,
@@ -151,7 +178,8 @@ class DefaultHomeRepository : HomeRepository {
                         "빅마트",
                         true,
                         LocationLatLngEntity(128.0, 36.0),
-                        "https://picsum.photos/200"
+                        "https://picsum.photos/200",
+                        0.11f
                     ),
                     "아이스티 분말",
                     5000,
@@ -170,7 +198,8 @@ class DefaultHomeRepository : HomeRepository {
                         "빅마트",
                         true,
                         LocationLatLngEntity(128.0, 36.0),
-                        "https://picsum.photos/200"
+                        "https://picsum.photos/200",
+                        0.11f
                     ),
                     "포테이토칩",
                     1300,

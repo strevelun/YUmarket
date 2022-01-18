@@ -8,13 +8,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.YUmarket.R
 import com.example.YUmarket.databinding.FragmentHomeMainBinding
 import com.example.YUmarket.model.homelist.HomeListModel
+import com.example.YUmarket.model.homelist.TownMarketModel
 import com.example.YUmarket.model.homelist.category.HomeListCategory
 import com.example.YUmarket.screen.base.BaseFragment
 import com.example.YUmarket.screen.home.HomeFragment
 import com.example.YUmarket.util.LocationData
 import com.example.YUmarket.util.LocationState
+import com.example.YUmarket.util.provider.ResourcesProvider
 import com.example.YUmarket.widget.adapter.ModelRecyclerAdapter
-import com.example.YUmarket.widget.adapter.listener.home.HomeListListener
+import com.example.YUmarket.widget.adapter.listener.home.TownMarketListener
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -29,6 +32,7 @@ class HomeMainFragment
 
     override val viewModel by viewModel<HomeMainViewModel>()
 
+    private val resourcesProvider by inject<ResourcesProvider>()
 
     override fun getViewBinding(): FragmentHomeMainBinding =
         FragmentHomeMainBinding.inflate(layoutInflater)
@@ -53,10 +57,10 @@ class HomeMainFragment
         ModelRecyclerAdapter<HomeListModel, HomeMainViewModel>(
             listOf(),
             viewModel,
-//            resourcesProvider,
-            object : HomeListListener {
+            resourcesProvider,
+            object : TownMarketListener {
                 // RecyclerView의 Item을 클릭할때
-                override fun onClickItem(model: HomeListModel) {
+                override fun onClickItem(model: TownMarketModel) {
                     // TODO 22.01.18 start detail market activity when clicked
                     Toast.makeText(context, model.toString(), Toast.LENGTH_SHORT).show()
                 }
