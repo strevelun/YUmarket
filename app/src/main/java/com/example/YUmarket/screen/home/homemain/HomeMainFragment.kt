@@ -19,7 +19,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 
 /**
- * [BottomNavigationView]에서 Home을 선택하면 띄워줄 Fragment
+ * BottomNavigationView에서 Home을 선택하면 띄워줄 Fragment
  * @author Main 정남진, Sub 김건우, 김도엽, 배은호, 허희태
  * @since 2022.01.18
  */
@@ -57,6 +57,7 @@ class HomeMainFragment
             object : HomeListListener {
                 // RecyclerView의 Item을 클릭할때
                 override fun onClickItem(model: HomeListModel) {
+                    // TODO 22.01.18 start detail market activity when clicked
                     Toast.makeText(context, model.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
@@ -133,35 +134,41 @@ class HomeMainFragment
      */
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         // TODO 22.01.18 add list sort
-        when (parent!!.getItemAtPosition(position).toString()) {
-            getString(R.string.all) -> {
+        when (position) {
+            // 동네마켓
+            0 -> {
 
             }
 
-            getString(R.string.food) -> {
+            // 식/음료
+            1 -> {
 
             }
 
-            getString(R.string.mart) -> {
+            // 편의점/마트
+            2 -> {
 
             }
 
-            getString(R.string.service) -> {
+            // 서비스업종
+            3 -> {
 
             }
 
-            getString(R.string.fashion) -> {
+            // 패션의류
+            4 -> {
 
             }
 
-            getString(R.string.accessory) -> {
+            // 패션잡화
+            5 -> {
 
             }
 
         }
     }
 
-    override fun onNothingSelected(p0: AdapterView<*>?) {
+    override fun onNothingSelected(parent: AdapterView<*>?) {
         TODO("Not yet implemented")
     }
 

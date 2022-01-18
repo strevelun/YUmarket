@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
  * 기본적으로 Repository에서 Data를 가져온다.
  * @author Main 정남진, Sub 김건우, 김도엽, 배은호, 허희태
  * @since 2021.01.18
+ * @param homeRepository 마켓 정보를 가져올 Repository
  */
 class HomeMainViewModel(
     private val homeRepository: HomeRepository
@@ -32,7 +33,6 @@ class HomeMainViewModel(
         // get list after get location data
         if (LocationData.locationStateLiveData.value is LocationState.Success) {
             // TODO sort by distance
-            // TODO get list by category
             _marketData.value = homeRepository.getList(HomeCategory.ALL)
         }
     }

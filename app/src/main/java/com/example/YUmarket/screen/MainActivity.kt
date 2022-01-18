@@ -21,7 +21,6 @@ import com.example.YUmarket.screen.myinfo.MyInfoFragment
 import com.example.YUmarket.screen.orderlist.OrderListFragment
 import com.example.YUmarket.util.LocationData
 import com.example.YUmarket.util.LocationState
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -94,13 +93,13 @@ class MainActivity
         showFragment(HomeMainFragment.newInstance(), HomeMainFragment.TAG)
 
         locationTitleTextView.setOnClickListener {
-            viewModel.getMapSearchInfo()?.let { mapInfo ->
+//            viewModel.getMapSearchInfo()?.let { mapInfo ->
 //                changeLocationLauncher.launch(
 //                    MyLocationActivity.newIntent(
 //                        requireContext(), mapInfo
 //                    )
 //                )
-            }
+//            }
         }
 
         // TODO
