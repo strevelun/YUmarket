@@ -99,7 +99,8 @@ class MainActivity
 
     override fun initViews() = with(binding) {
 
-        // BottomNavigationView의 동작을 Controller를 이용하여 설정
+        // 22.01.19 BottomNavigationView의 동작을 Controller를 이용하여 설정
+        // by 정남진
         bottomNav.setupWithNavController(navController)
 
 //        locationTitleTextView.setOnClickListener {

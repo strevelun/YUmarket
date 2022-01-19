@@ -114,6 +114,9 @@ class HomeMainFragment
         }
     }
 
+    /**
+     * 카테고리 버튼별 동작을 Navigation을 이용하여 설정
+     */
     private fun setCategoryButtonListener() = with(binding) {
 
         foodCategoryListButton.setOnClickListener {
