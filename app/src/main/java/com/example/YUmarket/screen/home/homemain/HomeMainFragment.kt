@@ -44,8 +44,24 @@ class HomeMainFragment
             when (it) {
                 // TODO 22.01.19 add more state handle logics
 
+                is HomeMainState.Uninitialized -> {
+
+                }
+
+                is HomeMainState.Loading -> {
+
+                }
+
                 is HomeMainState.Success -> {
                     nearbyMarketAdapter.submitList(it.marketModelList)
+                }
+
+                is HomeMainState.Error -> {
+                    Toast.makeText(
+                        context,
+                        R.string.cannot_load_data,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -58,7 +74,6 @@ class HomeMainFragment
             }
         }
     }
-
 
     private val nearbyMarketAdapter by lazy {
         ModelRecyclerAdapter<HomeListModel, HomeMainViewModel>(
