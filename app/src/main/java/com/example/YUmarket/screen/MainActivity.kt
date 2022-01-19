@@ -10,29 +10,41 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavHost
+import androidx.navigation.ui.setupWithNavController
 import com.example.YUmarket.R
 import com.example.YUmarket.data.entity.location.LocationLatLngEntity
 import com.example.YUmarket.databinding.ActivityMainBinding
 import com.example.YUmarket.screen.base.BaseActivity
-import com.example.YUmarket.screen.home.HomeFragment
+import com.example.YUmarket.screen.home.homemain.HomeMainFragment
 import com.example.YUmarket.screen.like.LikeFragment
 import com.example.YUmarket.screen.map.MapFragment
 import com.example.YUmarket.screen.myinfo.MyInfoFragment
 import com.example.YUmarket.screen.orderlist.OrderListFragment
 import com.example.YUmarket.util.LocationData
 import com.example.YUmarket.util.LocationState
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity
-    : BaseActivity<MainViewModel, ActivityMainBinding>(),
-    BottomNavigationView.OnNavigationItemSelectedListener {
+    : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     companion object {
         val locationPermissions = arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION
         )
+
+    }
+
+    // Navigation에 사용할 Controller
+    private val navController by lazy {
+        val hostContainer =
+            supportFragmentManager
+                .findFragmentById(R.id.fragmentContainer)
+                    as NavHost
+
+        hostContainer.navController
     }
 
     private val permissionLauncher =
@@ -63,7 +75,6 @@ class MainActivity
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
     override fun observeData() = with(binding) {
-//        viewModel.mainStateLiveData
             LocationData.locationStateLiveData.observe(this@MainActivity) {
             when (it) {
                 is LocationState.Uninitialized -> {
@@ -87,69 +98,22 @@ class MainActivity
     }
 
     override fun initViews() = with(binding) {
-        bottomNav.setOnItemSelectedListener(this@MainActivity)
 
-        // TODO show home fragment
-        showFragment(HomeFragment.newInstance(), HomeFragment.TAG)
+        // 22.01.19 BottomNavigationView의 동작을 Controller를 이용하여 설정
+        // by 정남진
+        bottomNav.setupWithNavController(navController)
 
-        locationTitleTextView.setOnClickListener {
-            viewModel.getMapSearchInfo()?.let { mapInfo ->
+//        locationTitleTextView.setOnClickListener {
+//            viewModel.getMapSearchInfo()?.let { mapInfo ->
 //                changeLocationLauncher.launch(
 //                    MyLocationActivity.newIntent(
 //                        requireContext(), mapInfo
 //                    )
 //                )
-            }
-        }
-
-        // TODO
-//        getMyLocation()
+//            }
+//        }
     }
 
-    private fun showFragment(fragment: Fragment, tag: String) {
-        val fragmentFound = supportFragmentManager.findFragmentByTag(tag)
-
-        supportFragmentManager.fragments.forEach {
-            supportFragmentManager.beginTransaction().hide(it).commitAllowingStateLoss()
-        }
-
-        fragmentFound?.let {
-            supportFragmentManager.beginTransaction().show(it).commitAllowingStateLoss()
-        } ?: kotlin.run {
-            supportFragmentManager.beginTransaction().add(R.id.fragmentContainer, fragment, tag).commitAllowingStateLoss()
-        }
-    }
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.home -> {
-                showFragment(HomeFragment.newInstance(), HomeFragment.TAG)
-                return true
-            }
-
-            R.id.order_list -> {
-                showFragment(OrderListFragment.newInstance(), OrderListFragment.TAG)
-                return true
-            }
-
-            R.id.like -> {
-                showFragment(LikeFragment.newInstance(), LikeFragment.TAG)
-                return true
-            }
-
-            R.id.map -> {
-                showFragment(MapFragment.newInstance(), MapFragment.TAG)
-                return true
-            }
-
-            R.id.my_info -> {
-                showFragment(MyInfoFragment.newInstance(), MyInfoFragment.TAG)
-                return true
-            }
-        }
-
-        return false
-    }
 
     private fun getMyLocation() {
         if (::locationManager.isInitialized.not()) {

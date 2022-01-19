@@ -27,34 +27,17 @@ class MainViewModel(
 
         val addressInfo = mapRepository.getReverseGeoInformation(locationLatLngEntity)
 
-        addressInfo?.let { addressInfo ->
-
-            val mapSearchInfoEntityResult = MapSearchInfoEntity(
-                fullAddress = addressInfo.fullAddress ?: "주소 정보 없음",
-                name = addressInfo.buildingName ?: "주소 정보 없음",
-                locationLatLng = currentLocation
-            )
-
-//            mainStateLiveData.value = MainState.Success(
-//                mapSearchInfoEntity = mapSearchInfoEntityResult,
-//                isLocationSame = false // TODO stub
-//            )
+        addressInfo?.let { addressInfoResult ->
 
             LocationData.locationStateLiveData.value = LocationState.Success(
                 mapSearchInfoEntity = MapSearchInfoEntity(
-                    fullAddress = addressInfo.fullAddress ?: "주소 정보 없음",
-                    name = addressInfo.buildingName ?: "주소 정보 없음",
+                    fullAddress = addressInfoResult.fullAddress ?: "주소 정보 없음",
+                    name = addressInfoResult.buildingName ?: "주소 정보 없음",
                     locationLatLng = currentLocation),
                 isLocationSame = false
             )
 
-//            LocationData.locationStateLiveData.value = LocationState.Success(mapSearchInfoEntityResult)
-
         } ?: kotlin.run {
-//            mainStateLiveData.value = MainState.Error(
-//                R.string.cannot_load_address_info
-//            )
-
             LocationData.locationStateLiveData.value = LocationState.Error(
                 R.string.cannot_load_address_info
             )

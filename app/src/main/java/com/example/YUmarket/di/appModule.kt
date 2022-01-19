@@ -8,6 +8,7 @@ import com.example.YUmarket.model.homelist.category.HomeListCategory
 import com.example.YUmarket.screen.MainViewModel
 import com.example.YUmarket.screen.home.homelist.HomeListViewModel
 import com.example.YUmarket.screen.home.HomeViewModel
+import com.example.YUmarket.screen.home.homemain.HomeMainViewModel
 import com.example.YUmarket.screen.like.LikeViewModel
 import com.example.YUmarket.screen.map.MapViewModel
 import com.example.YUmarket.screen.myinfo.MyInfoViewModel
@@ -49,4 +50,5 @@ val appModule = module {
     single { Dispatchers.IO }
     single { Dispatchers.Main }
 
+    viewModel { HomeMainViewModel(get()) }
 }

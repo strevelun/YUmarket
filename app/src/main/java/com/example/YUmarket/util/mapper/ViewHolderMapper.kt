@@ -2,27 +2,34 @@ package com.example.YUmarket.util.mapper
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.example.YUmarket.databinding.ViewholderRestaurantBinding
+import com.example.YUmarket.databinding.ViewholderNearbyMarketBinding
 import com.example.YUmarket.model.CellType
 import com.example.YUmarket.model.Model
 import com.example.YUmarket.screen.base.BaseViewModel
+import com.example.YUmarket.util.provider.ResourcesProvider
 import com.example.YUmarket.widget.adapter.viewholder.ModelViewHolder
+import com.example.YUmarket.widget.adapter.viewholder.homemain.NearbyMarketViewHolder
 
-// 임시 비활성화
 object ViewHolderMapper {
     @Suppress("UNCHECKED_CAST")
     fun <M : Model> map(
         parent: ViewGroup,
         type: CellType,
         viewModel: BaseViewModel,
-        // TODO resource provider
+        resourcesProvider: ResourcesProvider
     ): ModelViewHolder<M> {
 
         val inflater = LayoutInflater.from(parent.context)
 
         return when (type) {
-            CellType.RESTAURANT_CELL -> Unit
-            CellType.HOME_CELL -> Unit
+            CellType.HOME_CELL -> {
+                NearbyMarketViewHolder(
+                    ViewholderNearbyMarketBinding.inflate(inflater),
+                    viewModel,
+                    resourcesProvider
+                )
+            }
         } as ModelViewHolder<M>
+
     }
 }

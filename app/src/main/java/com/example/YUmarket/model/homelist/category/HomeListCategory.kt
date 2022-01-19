@@ -3,6 +3,7 @@ package com.example.YUmarket.model.homelist.category
 import androidx.annotation.StringRes
 import com.example.YUmarket.R
 
+
 /**
  * HomeItem들의 대분류를 정의한 enum class
  * @author Doyeop Kim (main)

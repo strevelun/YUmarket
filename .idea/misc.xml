@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/SnackBox/!AndroidProjectGit/YUmarket/app/src/main/res/drawable/selector_navigation_color.xml" value="0.26979166666666665" />
+        <entry key="..\:/SnackBox/!AndroidProjectGit/YUmarket/app/src/main/res/layout/activity_main.xml" value="0.21014492753623187" />
+        <entry key="..\:/SnackBox/!AndroidProjectGit/YUmarket/app/src/main/res/layout/fragment_home.xml" value="0.1296875" />
+        <entry key="..\:/SnackBox/!AndroidProjectGit/YUmarket/app/src/main/res/layout/fragment_home_main.xml" value="0.4" />
+        <entry key="..\:/SnackBox/!AndroidProjectGit/YUmarket/app/src/main/res/layout/viewholder_nearby_market.xml" value="0.264" />
         <entry key="..\:/SnackBox/!Mega/MyApplication23/app/src/main/res/layout/fragment_home_list.xml" value="0.1933876811594203" />
         <entry key="..\:/Users/LG/AndroidStudioProjects/YU Market 0.1/app/src/main/res/layout/activity_main.xml" value="0.1265625" />
         <entry key="..\:/Users/LG/AndroidStudioProjects/YU Market 0.1/app/src/main/res/layout/fragment_home.xml" value="0.1265625" />

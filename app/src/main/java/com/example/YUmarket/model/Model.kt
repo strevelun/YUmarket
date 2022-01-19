@@ -13,7 +13,6 @@ abstract class Model(
                 return oldItem.id == newItem.id && oldItem.type == newItem.type
             }
 
-            // TODO equal?
             @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(oldItem: Model, newItem: Model): Boolean {
                 return oldItem === newItem

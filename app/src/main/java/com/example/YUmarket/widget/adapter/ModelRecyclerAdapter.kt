@@ -6,13 +6,14 @@ import com.example.YUmarket.model.CellType
 import com.example.YUmarket.model.Model
 import com.example.YUmarket.screen.base.BaseViewModel
 import com.example.YUmarket.util.mapper.ViewHolderMapper
+import com.example.YUmarket.util.provider.ResourcesProvider
 import com.example.YUmarket.widget.adapter.listener.AdapterListener
 import com.example.YUmarket.widget.adapter.viewholder.ModelViewHolder
 
 class ModelRecyclerAdapter<M : Model, VM : BaseViewModel>(
     private var modelList: List<Model>,
     private val viewModel: VM,
-    // TODO resource provider
+    private val resourcesProvider: ResourcesProvider,
     private val adapterListener: AdapterListener
 ) : ListAdapter<Model, ModelViewHolder<M>>(Model.DIFF_CALLBACK) {
 
@@ -20,7 +21,7 @@ class ModelRecyclerAdapter<M : Model, VM : BaseViewModel>(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ModelViewHolder<M> {
         // TODO Add res provider
-        return ViewHolderMapper.map(parent, CellType.values()[viewType], viewModel)
+        return ViewHolderMapper.map(parent, CellType.values()[viewType], viewModel, resourcesProvider)
     }
 
     @Suppress("UNCHECKED_CAST")
