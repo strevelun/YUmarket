@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavHost
+import androidx.navigation.ui.setupWithNavController
 import com.example.YUmarket.R
 import com.example.YUmarket.data.entity.location.LocationLatLngEntity
 import com.example.YUmarket.databinding.ActivityMainBinding
@@ -25,8 +27,7 @@ import com.google.android.material.navigation.NavigationBarView
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity
-    : BaseActivity<MainViewModel, ActivityMainBinding>(),
-    NavigationBarView.OnItemSelectedListener {
+    : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     companion object {
         val locationPermissions = arrayOf(
@@ -34,6 +35,16 @@ class MainActivity
             Manifest.permission.ACCESS_COARSE_LOCATION
         )
 
+    }
+
+    // Navigation에 사용할 Controller
+    private val navController by lazy {
+        val hostContainer =
+            supportFragmentManager
+                .findFragmentById(R.id.fragmentContainer)
+                    as NavHost
+
+        hostContainer.navController
     }
 
     private val permissionLauncher =
@@ -87,9 +98,9 @@ class MainActivity
     }
 
     override fun initViews() = with(binding) {
-        bottomNav.setOnItemSelectedListener(this@MainActivity)
 
-        showFragment(HomeMainFragment.newInstance(), HomeMainFragment.TAG)
+        // BottomNavigationView의 동작을 Controller를 이용하여 설정
+        bottomNav.setupWithNavController(navController)
 
 //        locationTitleTextView.setOnClickListener {
 //            viewModel.getMapSearchInfo()?.let { mapInfo ->
@@ -102,50 +113,6 @@ class MainActivity
 //        }
     }
 
-    private fun showFragment(fragment: Fragment, tag: String) {
-        val fragmentFound = supportFragmentManager.findFragmentByTag(tag)
-
-        supportFragmentManager.fragments.forEach {
-            supportFragmentManager.beginTransaction().hide(it).commitAllowingStateLoss()
-        }
-
-        fragmentFound?.let {
-            supportFragmentManager.beginTransaction().show(it).commitAllowingStateLoss()
-        } ?: kotlin.run {
-            supportFragmentManager.beginTransaction().add(R.id.fragmentContainer, fragment, tag).commitAllowingStateLoss()
-        }
-    }
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.home -> {
-                showFragment(HomeMainFragment.newInstance(), HomeMainFragment.TAG)
-                return true
-            }
-
-            R.id.order_list -> {
-                showFragment(OrderListFragment.newInstance(), OrderListFragment.TAG)
-                return true
-            }
-
-            R.id.like -> {
-                showFragment(LikeFragment.newInstance(), LikeFragment.TAG)
-                return true
-            }
-
-            R.id.map -> {
-                showFragment(MapFragment.newInstance(), MapFragment.TAG)
-                return true
-            }
-
-            R.id.my_info -> {
-                showFragment(MyInfoFragment.newInstance(), MyInfoFragment.TAG)
-                return true
-            }
-        }
-
-        return false
-    }
 
     private fun getMyLocation() {
         if (::locationManager.isInitialized.not()) {
