@@ -2,6 +2,7 @@ package com.example.YUmarket.screen.home
 
 
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.navArgs
 import com.example.YUmarket.databinding.FragmentHomeBinding
 import com.example.YUmarket.model.homelist.category.HomeListCategory
 import com.example.YUmarket.screen.base.BaseFragment
@@ -19,6 +20,9 @@ class HomeFragment
 
     override val viewModel by viewModel<HomeViewModel>()
 
+    // 22.01.19 Navigation SafeArgs by 정남진
+    private val args by navArgs<HomeFragmentArgs>()
+
     override fun getViewBinding(): FragmentHomeBinding =
         FragmentHomeBinding.inflate(layoutInflater)
 
@@ -31,6 +35,10 @@ class HomeFragment
             when (it) {
                 is LocationState.Success -> {
                     initViewPager()
+
+                    // 22.01.19 View Pager의 현재 Item을 SafeArgs로 받아온 Tab으로 설정
+                    // by 정남진
+                    viewPager.currentItem = args.goToTab.ordinal
                 }
             }
         }
