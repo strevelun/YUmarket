@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.YUmarket.R
 import com.example.YUmarket.databinding.FragmentHomeMainBinding
@@ -104,32 +105,11 @@ class HomeMainFragment
 
             // 더보기를 누르면 마켓을 List로 띄워주는 Fragment로 이동
             showMoreTextView.setOnClickListener {
-                showListFragment()
+                findNavController().navigate(
+                    HomeMainFragmentDirections.actionHomeMainFragmentToHomeFragment()
+                )
             }
 
-        }
-    }
-
-
-    /**
-     * 더보기를 클릭하면 마켓을 RecyclerView로
-     * 띄워주는 Fragment(현재 HomeFragment)를 띄워준다.
-     * [com.example.YUmarket.screen.MainActivity.showFragment]와 같다.
-     */
-    private fun showListFragment() {
-        val fragmentManager = parentFragmentManager
-        val fragmentFound = fragmentManager.findFragmentByTag(HomeFragment.TAG)
-
-        fragmentManager.fragments.forEach {
-            fragmentManager.beginTransaction().hide(it).commitAllowingStateLoss()
-        }
-
-        fragmentFound?.let {
-            fragmentManager.beginTransaction().show(it).commitAllowingStateLoss()
-        } ?: kotlin.run {
-            fragmentManager.beginTransaction()
-                .add(R.id.fragmentContainer, HomeFragment.newInstance(), HomeFragment.TAG)
-                .commitAllowingStateLoss()
         }
     }
 
