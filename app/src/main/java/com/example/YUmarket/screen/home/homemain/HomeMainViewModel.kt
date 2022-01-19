@@ -24,16 +24,28 @@ class HomeMainViewModel(
     // TODO 22.01.18 add item repository
 ) : BaseViewModel() {
 
-    // TODO 22.01.18 add State?
-    private val _marketData = MutableLiveData<List<TownMarketModel>>()
-    val marketData: LiveData<List<TownMarketModel>> = _marketData
+    private val _marketData = MutableLiveData<HomeMainState>(HomeMainState.Uninitialized)
+    val marketData: LiveData<HomeMainState> = _marketData
 
     override fun fetchData(): Job = viewModelScope.launch {
-
         // get list after get location data
-        if (LocationData.locationStateLiveData.value is LocationState.Success) {
+        // 22.01.19 성공적으로 불러온 뒤에는 reloadData 이외에 Data는 계속 불러오는 것을 방지
+        // by 정남진
+        if (marketData.value !is HomeMainState.Success &&
+            LocationData.locationStateLiveData.value is LocationState.Success
+        ) {
+            _marketData.value = HomeMainState.Loading
+
             // sorted by distance
-            _marketData.value = homeRepository.getAllMarketList().sortedBy { it.distance }
+            _marketData.value = HomeMainState.Success(
+                marketModelList = homeRepository.getAllMarketList().sortedBy { it.distance }
+            )
         }
+
+    }
+
+    fun reloadData(): Job {
+        _marketData.value = HomeMainState.Loading
+        return fetchData()
     }
 }

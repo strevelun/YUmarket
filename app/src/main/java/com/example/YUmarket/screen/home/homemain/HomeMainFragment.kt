@@ -41,7 +41,13 @@ class HomeMainFragment
     override fun observeData() {
         // marketData가 변경되면 update
         viewModel.marketData.observe(viewLifecycleOwner) {
-            nearbyMarketAdapter.submitList(it)
+            when (it) {
+                // TODO 22.01.19 add more state handle logics
+
+                is HomeMainState.Success -> {
+                    nearbyMarketAdapter.submitList(it.marketModelList)
+                }
+            }
         }
 
         // 위치 정보를 불러오고 fetchData
@@ -80,7 +86,6 @@ class HomeMainFragment
         }
 
         with(binding) {
-
             // 새로운 할인상품에 사용할 Spinner의 Adapter 설정
             newSaleItemSpinner.adapter = ArrayAdapter(
                 requireContext(),
