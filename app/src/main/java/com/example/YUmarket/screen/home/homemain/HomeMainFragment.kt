@@ -110,7 +110,48 @@ class HomeMainFragment
                 )
             }
 
+            setCategoryButtonListener()
         }
+    }
+
+    private fun setCategoryButtonListener() = with(binding) {
+
+        foodCategoryListButton.setOnClickListener {
+            findNavController().navigate(
+                HomeMainFragmentDirections.actionHomeMainFragmentToHomeFragment(HomeListCategory.FOOD)
+            )
+        }
+
+        martCategoryListButton.setOnClickListener {
+            findNavController().navigate(
+                HomeMainFragmentDirections.actionHomeMainFragmentToHomeFragment(HomeListCategory.MART)
+            )
+        }
+
+        serviceCategoryListButton.setOnClickListener {
+            findNavController().navigate(
+                HomeMainFragmentDirections.actionHomeMainFragmentToHomeFragment(HomeListCategory.SERVICE)
+            )
+        }
+
+        fashionCategoryListButton.setOnClickListener {
+            findNavController().navigate(
+                HomeMainFragmentDirections.actionHomeMainFragmentToHomeFragment(HomeListCategory.FASHION)
+            )
+        }
+
+        accessoryCategoryListButton.setOnClickListener {
+            findNavController().navigate(
+                HomeMainFragmentDirections.actionHomeMainFragmentToHomeFragment(HomeListCategory.ACCESSORY)
+            )
+        }
+
+        etcCategoryListButton.setOnClickListener {
+            findNavController().navigate(
+                HomeMainFragmentDirections.actionHomeMainFragmentToHomeFragment(HomeListCategory.ETC)
+            )
+        }
+
     }
 
     /**
@@ -149,6 +190,10 @@ class HomeMainFragment
 
             }
 
+            // 기타/마켓
+            6 -> {
+                
+            }
         }
     }
 
