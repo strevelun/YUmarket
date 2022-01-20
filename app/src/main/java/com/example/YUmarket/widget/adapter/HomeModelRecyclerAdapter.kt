@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.YUmarket.model.homelist.HomeListModel
 import com.example.YUmarket.model.homelist.category.HomeListCategory
 import com.example.YUmarket.screen.base.BaseViewModel
-import com.example.YUmarket.util.mapper.HomeListViewHolderMapper
+import com.example.YUmarket.util.mapper.ViewHolderMapper
 import com.example.YUmarket.util.provider.ResourcesProvider
 import com.example.YUmarket.widget.adapter.listener.AdapterListener
 import com.example.YUmarket.widget.adapter.viewholder.home.HomeModelViewHolder
@@ -30,7 +30,7 @@ class HomeModelRecyclerAdapter<M : HomeListModel, VM : BaseViewModel>(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): HomeModelViewHolder<HomeListModel> = HomeListViewHolderMapper.map(
+    ): HomeModelViewHolder<HomeListModel> = ViewHolderMapper.map(
         parent,
         HomeListCategory.values()[viewType],
         viewModel,
