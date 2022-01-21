@@ -9,6 +9,7 @@ import com.example.YUmarket.screen.base.BaseViewModel
 import com.example.YUmarket.util.provider.ResourcesProvider
 import com.example.YUmarket.widget.adapter.listener.AdapterListener
 import com.example.YUmarket.widget.adapter.listener.home.TownMarketListener
+import com.example.YUmarket.widget.adapter.viewholder.ModelViewHolder
 
 /**
  * TownMarket에 대한 RecyclerView의 ViewHolder class
@@ -19,8 +20,8 @@ import com.example.YUmarket.widget.adapter.listener.home.TownMarketListener
 class TownMarketViewHolder(
     private val binding: ViewholderTownMarketBinding,
     viewModel: BaseViewModel,
-    private val resourcesProvider: ResourcesProvider
-): HomeModelViewHolder<TownMarketModel>(binding, viewModel) {
+    resourcesProvider: ResourcesProvider
+): ModelViewHolder<TownMarketModel>(binding, viewModel, resourcesProvider) {
 
     override fun reset() = with(binding) {
         marketImageView.clear()

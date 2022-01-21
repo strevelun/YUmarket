@@ -9,6 +9,7 @@ import com.example.YUmarket.screen.base.BaseViewModel
 import com.example.YUmarket.util.provider.ResourcesProvider
 import com.example.YUmarket.widget.adapter.listener.AdapterListener
 import com.example.YUmarket.widget.adapter.listener.home.HomeItemListener
+import com.example.YUmarket.widget.adapter.viewholder.ModelViewHolder
 
 /**
  * HomeListFragment의 recyclerView에 적용되는 viewHolder (it's bout HomeItemModel)
@@ -19,8 +20,8 @@ import com.example.YUmarket.widget.adapter.listener.home.HomeItemListener
 class HomeItemModelViewHolder(
     private val binding: ViewholderHomeItemBinding,
     viewModel: BaseViewModel,
-    private val resourcesProvider: ResourcesProvider
-) : HomeModelViewHolder<HomeItemModel>(binding, viewModel) {
+    resourcesProvider: ResourcesProvider
+) : ModelViewHolder<HomeItemModel>(binding, viewModel, resourcesProvider) {
 
 
     override fun reset() = with(binding) {
