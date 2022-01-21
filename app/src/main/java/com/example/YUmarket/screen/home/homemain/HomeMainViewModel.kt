@@ -4,8 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.YUmarket.data.repository.restaurant.HomeRepository
-import com.example.YUmarket.model.homelist.HomeListModel
-import com.example.YUmarket.model.homelist.TownMarketModel
+import com.example.YUmarket.model.CellType
 import com.example.YUmarket.screen.base.BaseViewModel
 import com.example.YUmarket.util.LocationData
 import com.example.YUmarket.util.LocationState
@@ -38,7 +37,10 @@ class HomeMainViewModel(
 
             // sorted by distance
             _marketData.value = HomeMainState.Success(
-                marketModelList = homeRepository.getAllMarketList().sortedBy { it.distance }
+                // 임시로 CellType을 ViewModel에서 변경
+                marketModelList = homeRepository.getAllMarketList().map {
+                    it.copy(type = CellType.HOME_CELL)
+                }.sortedBy { it.distance }
             )
         }
 
