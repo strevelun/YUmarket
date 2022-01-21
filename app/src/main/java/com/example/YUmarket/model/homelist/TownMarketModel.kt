@@ -2,6 +2,7 @@ package com.example.YUmarket.model.homelist
 
 import com.example.YUmarket.data.entity.location.LocationLatLngEntity
 import com.example.YUmarket.model.CellType
+import com.example.YUmarket.model.Model
 import com.example.YUmarket.model.homelist.category.HomeListCategory
 
 /**
@@ -18,6 +19,5 @@ data class TownMarketModel(
     val locationLatLngEntity: LocationLatLngEntity,
     val marketImageUrl: String,
     val distance: Float, // 22.01.18 거리 추가 by 정남진
-    override val type: CellType = CellType.HOME_CELL,
-    override val homeListCategory: HomeListCategory = HomeListCategory.TOWN_MARKET
-) : HomeListModel(id, type, homeListCategory)
+    override val type: CellType = CellType.HOME_TOWN_MARKET_CELL
+) : Model(id, type)

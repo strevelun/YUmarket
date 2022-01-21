@@ -1,6 +1,7 @@
 package com.example.YUmarket.model.homelist
 
 import com.example.YUmarket.model.CellType
+import com.example.YUmarket.model.Model
 import com.example.YUmarket.model.homelist.category.HomeListCategory
 import com.example.YUmarket.model.homelist.category.HomeListDetailCategory
 
@@ -14,7 +15,7 @@ import com.example.YUmarket.model.homelist.category.HomeListDetailCategory
 // TODO repository를 통해서 entity -> model 매핑 시 연관관계를 반영해주기
 data class HomeItemModel(
     override val id: Long,
-    override val homeListCategory: HomeListCategory,
+    val homeListCategory: HomeListCategory,
     val homeListDetailCategory: HomeListDetailCategory,
     val itemImageUrl: String,
     val townMarketModel: TownMarketModel,
@@ -24,5 +25,16 @@ data class HomeItemModel(
     val stockQuantity: Int,
     val likeQuantity: Int,
     val reviewQuantity: Int,
-    override val type: CellType = CellType.HOME_CELL
-): HomeListModel(id, type, homeListCategory)
+    override val type: CellType = CellType.HOME_ITEM_CELL
+): Model(id, type) {
+
+    /**
+     * [Model.isTheSame]을 Override
+     */
+    override fun isTheSame(item: Model) =
+        if (item is HomeItemModel) {
+            super.isTheSame(item) && this.homeListCategory == item.homeListCategory
+        } else {
+            false
+        }
+}
