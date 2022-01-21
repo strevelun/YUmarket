@@ -1,5 +1,7 @@
 package com.example.YUmarket.di
 
+import com.example.YUmarket.data.repository.basket.BasketRepository
+import com.example.YUmarket.data.repository.basket.DefaultBasketRepository
 import com.example.YUmarket.data.repository.map.DefaultMapRepository
 import com.example.YUmarket.data.repository.map.MapRepository
 import com.example.YUmarket.data.repository.restaurant.DefaultHomeRepository
@@ -51,4 +53,9 @@ val appModule = module {
     single { Dispatchers.Main }
 
     viewModel { HomeMainViewModel(get()) }
+
+    single { provideDB(androidContext()) }
+    single { provideBasketDao(get()) }
+
+    single<BasketRepository> { DefaultBasketRepository(get(), get()) }
 }
