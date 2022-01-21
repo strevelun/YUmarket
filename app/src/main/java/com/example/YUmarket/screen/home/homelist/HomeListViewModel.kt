@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.YUmarket.data.repository.restaurant.HomeRepository
 import com.example.YUmarket.model.homelist.HomeItemModel
-import com.example.YUmarket.model.homelist.HomeListModel
 import com.example.YUmarket.model.homelist.TownMarketModel
 import com.example.YUmarket.model.homelist.category.HomeListCategory
 import com.example.YUmarket.screen.base.BaseViewModel

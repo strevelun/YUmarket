@@ -8,11 +8,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.YUmarket.R
 import com.example.YUmarket.databinding.FragmentHomeMainBinding
-import com.example.YUmarket.model.homelist.HomeListModel
 import com.example.YUmarket.model.homelist.TownMarketModel
 import com.example.YUmarket.model.homelist.category.HomeListCategory
 import com.example.YUmarket.screen.base.BaseFragment
-import com.example.YUmarket.screen.home.HomeFragment
 import com.example.YUmarket.util.LocationData
 import com.example.YUmarket.util.LocationState
 import com.example.YUmarket.util.provider.ResourcesProvider
@@ -76,7 +74,7 @@ class HomeMainFragment
     }
 
     private val nearbyMarketAdapter by lazy {
-        ModelRecyclerAdapter<HomeListModel, HomeMainViewModel>(
+        ModelRecyclerAdapter<TownMarketModel, HomeMainViewModel>(
             listOf(),
             viewModel,
             resourcesProvider,

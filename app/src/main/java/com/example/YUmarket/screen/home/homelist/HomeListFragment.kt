@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.YUmarket.databinding.FragmentHomeListBinding
+import com.example.YUmarket.model.Model
 import com.example.YUmarket.model.homelist.HomeItemModel
-import com.example.YUmarket.model.homelist.HomeListModel
 import com.example.YUmarket.model.homelist.TownMarketModel
 import com.example.YUmarket.model.homelist.category.HomeListCategory
 import com.example.YUmarket.screen.base.BaseFragment
 import com.example.YUmarket.util.provider.ResourcesProvider
-import com.example.YUmarket.widget.adapter.HomeModelRecyclerAdapter
+import com.example.YUmarket.widget.adapter.ModelRecyclerAdapter
 import com.example.YUmarket.widget.adapter.listener.home.HomeItemListener
 import com.example.YUmarket.widget.adapter.listener.home.TownMarketListener
 import org.koin.android.ext.android.inject
@@ -32,7 +32,7 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
     private val resourcesProvider by inject<ResourcesProvider>()
 
     private val adapter by lazy {
-        HomeModelRecyclerAdapter<HomeListModel, HomeListViewModel>(
+        ModelRecyclerAdapter<Model, HomeListViewModel>(
             listOf(), viewModel, resourcesProvider,
             adapterListener = when (homeListCategory) {
                 HomeListCategory.TOWN_MARKET -> {
