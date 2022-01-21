@@ -20,7 +20,6 @@ class ModelRecyclerAdapter<M : Model, VM : BaseViewModel>(
     override fun getItemViewType(position: Int): Int = modelList[position].type.ordinal
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ModelViewHolder<M> {
-        // TODO Add res provider
         return ViewHolderMapper.map(parent, CellType.values()[viewType], viewModel, resourcesProvider)
     }
 
