@@ -8,11 +8,11 @@ import com.example.YUmarket.data.entity.room.BasketEntity
 @Dao
 interface BasketDao {
     @Query("select * from BasketEntity")
-    fun getAllItems(): List<BasketEntity>
+    suspend fun getAllItems(): List<BasketEntity>
 
     @Insert
-    fun insertItem(basketEntity: BasketEntity)
+    suspend fun insertItem(basketEntity: BasketEntity)
 
     @Query("delete from BasketEntity")
-    fun deleteAllItems()
+    suspend fun deleteAllItems()
 }
