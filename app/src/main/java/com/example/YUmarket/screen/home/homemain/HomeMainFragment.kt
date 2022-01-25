@@ -36,7 +36,11 @@ class HomeMainFragment
     override fun getViewBinding(): FragmentHomeMainBinding =
         FragmentHomeMainBinding.inflate(layoutInflater)
 
-    override fun observeData() {
+    // Spinner에 사용될 HomeListCategory List
+    // drop(1)을 하여 동네마켓 항목은 제외
+    private val categories = HomeListCategory.values().drop(1)
+
+    override fun observeData() = with (viewModel) {
         // marketData가 변경되면 update
         viewModel.marketData.observe(viewLifecycleOwner) {
             when (it) {
@@ -94,7 +98,7 @@ class HomeMainFragment
 
         // Spinner의 Adapter에 사용할 List
         // 마켓의 업종을 나타내는 String
-        val adapterList = HomeListCategory.values().map {
+        val adapterList = categories.map {
             getString(it.categoryNameId)
         }
 
@@ -179,43 +183,7 @@ class HomeMainFragment
      * Spinner에서 Item을 선택할때 동작 설정
      */
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        // TODO 22.01.18 add list sort
-        when (position) {
-            // 동네마켓
-            0 -> {
-
-            }
-
-            // 식/음료
-            1 -> {
-
-            }
-
-            // 편의점/마트
-            2 -> {
-
-            }
-
-            // 서비스업종
-            3 -> {
-
-            }
-
-            // 패션의류
-            4 -> {
-
-            }
-
-            // 패션잡화
-            5 -> {
-
-            }
-
-            // 기타/마켓
-            6 -> {
-                
-            }
-        }
+        viewModel.setItemFilter(categories[position])
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
