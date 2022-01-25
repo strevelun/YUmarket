@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.YUmarket.R
 import com.example.YUmarket.databinding.FragmentHomeMainBinding
+import com.example.YUmarket.model.homelist.HomeItemModel
 import com.example.YUmarket.model.homelist.TownMarketModel
 import com.example.YUmarket.model.homelist.category.HomeListCategory
 import com.example.YUmarket.screen.base.BaseFragment
@@ -15,6 +16,7 @@ import com.example.YUmarket.util.LocationData
 import com.example.YUmarket.util.LocationState
 import com.example.YUmarket.util.provider.ResourcesProvider
 import com.example.YUmarket.widget.adapter.ModelRecyclerAdapter
+import com.example.YUmarket.widget.adapter.listener.home.HomeItemListener
 import com.example.YUmarket.widget.adapter.listener.home.TownMarketListener
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -42,7 +44,7 @@ class HomeMainFragment
 
     override fun observeData() = with (viewModel) {
         // marketData가 변경되면 update
-        viewModel.marketData.observe(viewLifecycleOwner) {
+        marketData.observe(viewLifecycleOwner) {
             when (it) {
                 // TODO 22.01.19 add more state handle logics
 
@@ -54,8 +56,8 @@ class HomeMainFragment
 
                 }
 
-                is HomeMainState.Success -> {
-                    nearbyMarketAdapter.submitList(it.marketModelList)
+                is HomeMainState.Success<*> -> {
+                    nearbyMarketAdapter.submitList(it.modelList)
                 }
 
                 is HomeMainState.Error -> {
@@ -65,6 +67,8 @@ class HomeMainFragment
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+
+                else -> Unit
             }
         }
 
