@@ -68,6 +68,35 @@ class HomeMainFragment
             }
         }
 
+        itemData.observe(viewLifecycleOwner) {
+            when (it) {
+                // TODO 22.01.25 add more state handle logics
+                is HomeMainState.Uninitialized -> {
+
+                }
+
+                is HomeMainState.Loading -> {
+
+                }
+
+                is HomeMainState.ListLoaded -> with(binding.newSaleItemSpinner) {
+                    viewModel.setItemFilter(categories[selectedItemPosition])
+                }
+
+                is HomeMainState.Success<*> -> {
+                    newSaleItemsAdapter.submitList(it.modelList)
+                }
+
+                is HomeMainState.Error -> {
+                    Toast.makeText(
+                        context,
+                        R.string.cannot_load_data,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+
         // 위치 정보를 불러오고 fetchData
         LocationData.locationStateLiveData.observe(viewLifecycleOwner) {
             // get list after get location
@@ -86,6 +115,20 @@ class HomeMainFragment
                 // RecyclerView의 Item을 클릭할때
                 override fun onClickItem(model: TownMarketModel) {
                     // TODO 22.01.18 start detail market activity when clicked
+                    Toast.makeText(context, model.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+    }
+
+    private val newSaleItemsAdapter by lazy {
+        ModelRecyclerAdapter<HomeItemModel, HomeMainViewModel>(
+            listOf(),
+            viewModel,
+            resourcesProvider,
+            object : HomeItemListener {
+                override fun onClickItem(model: HomeItemModel) {
+                    // TODO 22.01.25 start detail market activity when clicked
                     Toast.makeText(context, model.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
@@ -131,6 +174,8 @@ class HomeMainFragment
                     HomeMainFragmentDirections.actionHomeMainFragmentToHomeFragment()
                 )
             }
+
+            newSaleItemRecyclerView.adapter = newSaleItemsAdapter
 
             setCategoryButtonListener()
         }
