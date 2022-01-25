@@ -227,4 +227,16 @@ class DefaultHomeRepository : HomeRepository {
             else -> listOf()
         }
     }
+
+    // TODO 22.01.25 임시로 만든 Method 나중에 제대로 구현
+    override fun getAllNewSaleItems(): List<HomeItemModel> {
+        val result = mutableListOf<HomeItemModel>()
+        val categories = HomeListCategory.values().drop(1)
+
+        categories.forEach {
+            result.addAll(findItemsByCategory(it))
+        }
+
+        return result
+    }
 }

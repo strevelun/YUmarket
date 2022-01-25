@@ -19,4 +19,12 @@ interface HomeRepository {
 
     /** HomeListCategory에 따라서 분기하여 해당하는 아이템들을 모두 호출하는 메서드 */
     fun findItemsByCategory(homeListCategory: HomeListCategory): List<HomeItemModel>
+
+    /**
+     * 새로 등록된 모든 할인 상품을 가져오는 Method
+     * @author Main 정남진, Sub 김건우, 김도엽, 배은호, 허희태
+     * @since 22.01.25
+     * @return 새로 등록된 모든 할인 상품 List
+     */
+    fun getAllNewSaleItems(): List<HomeItemModel>
 }
