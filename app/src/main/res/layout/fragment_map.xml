@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/topLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_curLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="현위치" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_destLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주소지" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="필터" />
+
+    </LinearLayout>
+
+        <com.naver.maps.map.MapView
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/topLinearLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_search_around"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/floating_button_search"
+        android:backgroundTint="@color/white"
+        android:text="근처 가게 보기"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/viewPager2"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager2"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="150dp"
+        android:visibility="gone"
+
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fbtn_close_viewPager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/ic_baseline_close_24"
+        app:layout_constraintBottom_toTopOf="@id/viewPager2"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="30dp"
+        android:visibility="gone"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

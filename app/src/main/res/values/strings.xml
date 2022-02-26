@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">My Application23</string>
+
+    <string name="home">홈</string>
+    <string name="order_list">주문목록</string>
+    <string name="like">찜</string>
+    <string name="map">지도</string>
+    <string name="my_info">내 정보</string>
+
+    <string name="cannot_load_address_info">위치 정보를 불러올 수 없습니다.</string>
+
+    <string name="POI_food_beverage">음식점;</string>
+    <string name="POI_service">서비스;</string>
+    <string name="POI_fashion_accessories">패션;</string>
+    <string name="POI_supermarket">편의점;슈퍼마켓;</string>
+    <string name="POI_fashion_clothes">의류;</string>
+    <string name="POI_etc">주차장;숙박</string>
+
+</resources>

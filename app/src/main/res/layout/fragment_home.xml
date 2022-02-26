@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <!--  TODO 21.12.30 TabLayout  -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabGravity="fill"
+        app:tabIndicatorFullWidth="false"
+        app:tabMaxWidth="0dp"
+        app:tabMode="auto" />
+
+    <HorizontalScrollView
+        android:id="@+id/filterScrollView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout">
+
+        <!--    TODO 21.12.30 기본으로 chipDefault가 체크    -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/orderChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
+            android:visibility="gone"
+            app:checkedChip="@id/chipDefault"
+            app:chipSpacingHorizontal="4dp"
+            app:chipSpacingVertical="6dp"
+            app:layout_constraintBottom_toTopOf="@id/viewPager"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true"
+            tools:visibility="visible">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipInitialize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="initialize"
+                android:visibility="gone"
+                app:chipIconEnabled="true"
+                tools:visibility="visible" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipFastDelivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="fast_delivery"
+                app:chipIconEnabled="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipDeliveryTip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="low_delivery_tip"
+                app:chipIconEnabled="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="default_order" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTopRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="top_rate"
+                app:chipIconEnabled="true" />
+
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:background="#535353"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+
+    <!--  TODO 21.12.30 ViewPager  -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filterScrollView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

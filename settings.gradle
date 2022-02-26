@@ -1,0 +1,15 @@
+// https://ideajini.tistory.com/15
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url 'https://naver.jfrog.io/artifactory/maven/'
+        }
+        jcenter() // Warning: this repository is going to shut down soon
+    }
+}
+rootProject.name = "My Application23"
+include ':app'

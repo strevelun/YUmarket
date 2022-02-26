@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/iv_viewpager_profile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="20dp"
+        android:src="@drawable/common_google_signin_btn_icon_dark_normal"
+        />
+
+    <TextView
+        android:id="@+id/tv_viewpager_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="타이틀"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@id/iv_viewpager_profile"
+        app:layout_constraintTop_toTopOf="@id/iv_viewpager_profile"
+        android:layout_marginStart="20dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/tv_viewpager_branch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_viewpager_title"
+        app:layout_constraintStart_toEndOf="@id/iv_viewpager_profile"
+        android:text="지점 | 0.0 km"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_viewpager_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/iv_viewpager_profile"
+        app:layout_constraintTop_toBottomOf="@id/tv_viewpager_branch"
+        android:text="가격"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="10sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_viewpager_discount_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/iv_viewpager_profile"
+        app:layout_constraintTop_toBottomOf="@id/tv_viewpager_price"
+        android:text="00%"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#FF0026"
+        />`
+
+
+    <TextView
+        android:id="@+id/tv_viewpager_discounted_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/tv_viewpager_discount_rate"
+        app:layout_constraintTop_toBottomOf="@id/tv_viewpager_price"
+        android:text="0000원"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_viewpager_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_viewpager_discount_rate"
+        android:text="0 / 0"
+        android:layout_marginEnd="30dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
