@@ -317,7 +317,7 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
         binding.btnCurLocation.setOnClickListener {
             try {
                 map?.cameraPosition =
-                    CameraPosition(LatLng(curLocation.latitude, curLocation?.longitude), 15.0)
+                    CameraPosition(LatLng(curLocation.latitude, curLocation.longitude), 15.0)
             }catch(ex : Exception){
                 Toast.makeText(context, "초기화 중", Toast.LENGTH_SHORT).show()
             }
@@ -326,7 +326,7 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
         binding.btnDestLocation.setOnClickListener {
             try {
             map?.cameraPosition =
-                CameraPosition(LatLng(destLocation?.latitude, destLocation?.longitude), 15.0)
+                CameraPosition(LatLng(destLocation.latitude, destLocation.longitude), 15.0)
         }catch(ex : Exception){
             Toast.makeText(context, "초기화 중", Toast.LENGTH_SHORT).show()
         }
@@ -581,7 +581,7 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
         }
 
         map?.cameraPosition =
-            CameraPosition(LatLng(destLocation.latitude, destLocation?.longitude), 15.0)
+            CameraPosition(LatLng(destLocation.latitude, destLocation.longitude), 15.0)
 
         map?.setOnMapTwoFingerTapListener { pointF, latLng ->
 
@@ -622,7 +622,7 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
     override fun onMapReady(map: NaverMap) {
 
         this.map = map
-        geocoder = Geocoder(context)
+        //geocoder = Geocoder(context)
 
         /* TODO
             geocoder.getFromLocationName()
@@ -636,7 +636,7 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
 
         try {
             map.cameraPosition =
-                CameraPosition(LatLng(curLocation.latitude, curLocation?.longitude), 15.0)
+                CameraPosition(LatLng(curLocation.latitude, curLocation.longitude), 15.0)
         }catch(ex : Exception){
             Toast.makeText(context, "위치 초기화 중", Toast.LENGTH_SHORT).show()
         }
