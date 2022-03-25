@@ -42,6 +42,7 @@ import com.example.myapplication23.screen.map.MapProductInfo.MapProductInfoActiv
 import com.example.myapplication23.widget.adapter.MapFragmentPagerAdapter
 import com.example.myapplication23.widget.adapter.listener.map.MapItemListAdapterListener
 import com.naver.maps.map.overlay.InfoWindow
+import com.naver.maps.map.overlay.OverlayImage
 import kotlinx.android.extensions.LayoutContainer
 import java.lang.Math.round
 import java.util.concurrent.Executor
@@ -81,7 +82,7 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
     private lateinit var chkEtc: CheckBox
     private lateinit var chkAll : CheckBox
 
-    private lateinit var tMapData: TMapData
+    //private lateinit var tMapData: TMapData
 
     private lateinit var nMapView: MapView
     private var map: NaverMap? = null
@@ -139,6 +140,9 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
         MapStoreModel(0, "부부식당", LatLng(35.84276976076099, 128.75035319046196),10.0f, testStoreItems0),
         MapStoreModel(1, "오빠야찜닭", LatLng(35.8431743483104, 128.74862612604866),10.0f, testStoreItems1),
         MapStoreModel(2, "커피플레이스", LatLng(35.84115830558572, 128.7540212700628), 10.0f, testStoreItems2, "영남대점"),
+        MapStoreModel(3, "오빠야찜닭3", LatLng(35.8421843483104, 128.74862612604866),10.0f, testStoreItems1),
+        MapStoreModel(4, "오빠야찜닭4", LatLng(35.8441943483104, 128.74862612604866),10.0f, testStoreItems2),
+        MapStoreModel(5, "오빠야찜닭5", LatLng(35.8451643483104, 128.74862612604866),10.0f, testStoreItems2),
         )
 
     override fun getViewBinding(): FragmentMapBinding =
@@ -212,19 +216,24 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
         filterCategoryOptions.add(layout.findViewById(R.id.fashion_clothes))
         filterCategoryOptions.add(layout.findViewById(R.id.etc))
 
+
         // 체크박스 누를때마다 돌면서 전부 true인지 확인하고, 전부 true이면 all의 체크 true
-        for(item in filterCategoryOptions)
+        for(item in filterCategoryOptions) {
+
+            filterCategoryChecked.add(true)
+
             item.setOnClickListener { // checkOnListener안한 이유는 직접 터치하지 않고 체크박스의 체크를 설정할때 불필요하게 호출됨
 
 
-                for(item in filterCategoryOptions)
-                    if(!item.isChecked) {
+                for (item in filterCategoryOptions)
+                    if (!item.isChecked) {
                         chkAll.isChecked = false // 이떄 all 리스너 동작 -> all은 클릭 리스너로 바꿈
                         return@setOnClickListener
                     }
 
                 chkAll.isChecked = true
             }
+        }
 
         chkVisit = layout.findViewById(R.id.visit)
         //filterCategoryOptions.add(chkVisit.isChecked)
@@ -275,6 +284,8 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
 
             for(i in 0 until filterCategoryOptions.size)
                 filterCategoryChecked[i] = filterCategoryOptions[i].isChecked
+
+            searchAround()
 
             dialog.dismiss()
             (layout.parent as ViewGroup).removeView(layout)
@@ -340,7 +351,7 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
             dialog = builder.show()
         }
 
-        tMapData = TMapData()
+        //tMapData = TMapData()
 
         binding.fbtnCloseViewPager.setOnClickListener {
             binding.viewPager2.visibility = View.GONE
@@ -352,8 +363,7 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
         binding.btnSearchAround.setOnClickListener {
             // int nRadius : 검색 반경값. 0~33까지 설정 가능. 1은 300m를 나타내며 33의 경우는 9900m를 의미
             // val curViewPoint = tMapView.getTMapPointFromScreenPoint(0.5f, 0.5f)
-            
-            // DB에서 현재 위치와 xkm 이내에 있는 가게들을 추려서 체크된 업종만 맵에 띄어줌
+
 /*
             var searchKeyword = StringBuilder()
 
@@ -363,29 +373,6 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
                 searchKeyword.append(resources.getString(R.string.POI_food_beverage))
             }
 
-            if (chkService.isChecked) {
-                searchKeyword.append(resources.getString(R.string.POI_service))
-            }
-
-            if (chkFashionAccessories.isChecked) {
-                searchKeyword.append(resources.getString(R.string.POI_fashion_accessories))
-            }
-
-            if (chkSupermarket.isChecked) {
-                searchKeyword.append(resources.getString(R.string.POI_supermarket))
-            }
-
-            if (chkFashionClothes.isChecked) {
-                searchKeyword.append(resources.getString(R.string.POI_fashion_clothes))
-            }
-
-            if (chkEtc.isChecked) {
-                searchKeyword.append(resources.getString(R.string.POI_etc))
-            }
-
- */
-
-            /*
            오버레이 객체는 아무 스레드에서나 생성할 수 있습니다.
            그러나 오버레이의 속성은 스레드 안전성이 보장되지 않으므로 여러 스레드에서 동시에 접근해서는 안됩니다.
            특히 지도에 추가된 오버레이의 속성은 메인 스레드에서만 접근해야 하며, 그렇지 않으면 CalledFromWrongThreadException이 발생합니다.
@@ -396,53 +383,95 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
             다음은 1000개의 마커를 백그라운드 스레드에서 생성하고 속성을 지정한 후 메인 스레드에서 지도에 추가하는 예제입니다.
         */
 
+            searchAround()
+        }
+    }
 
-            // TODO 지도에 있는 마커 다 없애기
-            markers.forEach { marker ->
-                marker.map = null
-            }
+    private fun searchAround(){
+        // TODO 지도에 있는 마커 다 없애기
+        markers.forEach { marker ->
+            marker.map = null
+        }
 
-            binding.viewPager2.visibility = View.GONE
-            binding.fbtnCloseViewPager.visibility = View.GONE
+        binding.viewPager2.visibility = View.GONE
+        binding.fbtnCloseViewPager.visibility = View.GONE
 
-            val executor : Executor = Executors.newCachedThreadPool()
-            val handler = Handler(Looper.getMainLooper())
+        val executor : Executor = Executors.newCachedThreadPool()
+        val handler = Handler(Looper.getMainLooper())
 
-            executor.execute{
-                // 백그라운드 쓰레드
-                // 마커에 식당 이름과 위치
-                markers = arrayListOf()
+        executor.execute{
+            // 백그라운드 쓰레드
+            // 마커에 식당 이름과 위치
+            markers = arrayListOf()
 
-                var idx = 0
+            var idx = 0
 
-                // TODO 할거
-                // 서버에서 내려받은 가게들을 하나씩 돌면서 좌표간의 거리를 계산하고, 거리가 일정 km 미만이면
-                // repeat에서 쓸 가게 배열에 넣는다.
-                // 또 필터창에 있는 가게 종류에 따라 해당하는 것만 필터링
-                
-                repeat(testStores.size) {
-                    markers += Marker().apply{
-                        position = LatLng(testStores[idx].location.latitude, testStores[idx].location.longitude)
+            // TODO 할거
+            // 서버에서 내려받은 가게들을 하나씩 돌면서 좌표간의 거리를 계산하고, 거리가 일정 km 미만이면
+            // repeat에서 쓸 가게 배열에 넣는다.
+            // 또 필터창에 있는 가게 종류에 따라 해당하는 것만 필터링
+
+            repeat(testStores.size) {
+
+                // TODO TEST
+                // id를 기준으로 테스트
+                // 필터 순서와 가게 종류 순서 맞추기
+
+                if(filterCategoryChecked[idx]) {
+
+                    markers += Marker().apply {
+                        position = LatLng(
+                            testStores[idx].location.latitude,
+                            testStores[idx].location.longitude
+                        )
                         icon = MarkerIcons.BLACK
-                        iconTintColor = Color.parseColor("#FA295B")
-                        zIndex = 111
                         tag = testStores[idx].name
                         zIndex = idx
-                        isHideCollidedMarkers = true
+                        //isHideCollidedMarkers = true
+
+                        // 가게 종류에 따라 마커 다르게 하기. 현재는 테스트를 위해 id에 따라서
+                        when (testStores[idx].id) {
+                            0L -> {
+                                icon = OverlayImage.fromResource(R.drawable.marker_m)
+                                iconTintColor = Color.parseColor("#46F5FF")
+                            }
+                            1L -> {
+                                icon = OverlayImage.fromResource(R.drawable.marker_r)
+                                iconTintColor = Color.parseColor("#FFCB41")
+                            }
+                            2L -> {
+                                icon = OverlayImage.fromResource(R.drawable.marker_s)
+                                iconTintColor = Color.parseColor("#886AFF")
+                            }
+                            3L -> {
+                                icon = OverlayImage.fromResource(R.drawable.marker_e)
+                                iconTintColor = Color.parseColor("#04B404")
+                            }
+                            4L -> {
+                                icon = OverlayImage.fromResource(R.drawable.marker_f)
+                                iconTintColor = Color.parseColor("#8A0886")
+                            }
+                            5L -> {
+                                icon = OverlayImage.fromResource(R.drawable.marker_f)
+                                iconTintColor = Color.parseColor("#0B2F3A")
+                            }
+                        }
+
                         setOnClickListener {
                             // idx로는 setOnClickListener에서 마커의 index를 못찾아서 고유값인 zIndex로 대체
 
-                            if(this@MapFragment.infoWindow != null)
+                            if (this@MapFragment.infoWindow != null)
                                 this@MapFragment.infoWindow?.close()
 
                             this@MapFragment.infoWindow = InfoWindow()
-                            this@MapFragment.infoWindow?.adapter = object : InfoWindow.DefaultTextAdapter(requireContext()) {
-                                override fun getText(infoWindow: InfoWindow): CharSequence {
-                                    return infoWindow.marker?.tag as CharSequence
+                            this@MapFragment.infoWindow?.adapter =
+                                object : InfoWindow.DefaultTextAdapter(requireContext()) {
+                                    override fun getText(infoWindow: InfoWindow): CharSequence {
+                                        return infoWindow.marker?.tag as CharSequence
+                                    }
                                 }
-                            }
                             this@MapFragment.infoWindow?.open(this)
-                            
+
                             // 여기서 오픈한 말풍선은 fbtnViewPager2를 클릭하면 제거
 
                             viewPagerAdapter.registerStore(testStores[zIndex])
@@ -452,105 +481,21 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
                             true
                         }
                     }
-
-                    idx++
                 }
 
-                // TODO 마커 추가하고 나중에 삭제는
-                handler.post{
-                    // 메인스레드
-                    markers.forEach { marker ->
-                        marker.map = map
-                    }
-                }
-
-
-            }
-/*
-            try {
-
-                /* TODO
-                    근처 가게 보기 버튼을 누르면
-                    1. DB에서 현재 자신이 위치한 주소를 가진 음식점을 찾아 받아온 후 list에 저장한다.
-                    2. 그 중에서 marker.position.distanceTo() 함수를 이용하여 xkm 이내에 있는 음식점들을 선별하여 list에 담는다.
-                    3. 마커 다 띄워주기 전까지 레이아웃에 로딩
-                */
-
-                tMapData.findAroundNamePOI(
-                    TMapPoint(destLocation.latitude, destLocation.longitude),
-                    "편의점",
-                    1,
-                    10
-                ) {
-
-                    activity?.runOnUiThread {
-
-                        for (i in markerPositions)
-                            i.map = null
-                        markerPositions.clear()
-
-                        for (i in 0 until it.size) {
-
-                            // 업종에 따라 마커 다르게
-                            val marker = Marker()
-
-                            marker.minZoom = 14.0
-
-                            val infoWindow = InfoWindow()
-                            infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(requireContext()) {
-                                override fun getText(infoWindow: InfoWindow): CharSequence {
-                                    return infoWindow.marker?.captionText as CharSequence? ?: ""
-                                }
-                            }
-                            marker.position =
-                                LatLng(it[i].noorLat.toDouble(), it[i].noorLon.toDouble())
-
-                            map?.setOnMapClickListener { _, _ ->
-                                // 마커를 생성하자마자 배열에 담고, 맵 아무곳이나 누를때 배열을 순회해서 전부 close()
-
-                            }
-
-
-                            marker.icon = when (it[i].upperBizName) {
-                                "음식점" -> OverlayImage.fromResource(R.drawable.restaurant_marker_icon)
-
-                                else -> MarkerIcons.PINK
-                            }
-
-                            marker.setOnClickListener {
-                                // 마커 터치하면 MapFragment 아래에 그 가게의 메뉴 Horizontal하게 출력
-                                // 말풍선
-
-                                marker.zIndex = 100
-
-                                if (marker.infoWindow == null) {
-                                    // 현재 마커에 정보 창이 열려있지 않을 경우 엶
-
-                                    infoWindow.position = marker.position
-                                    infoWindow.open(marker)
-
-                                    //infoWindow.open(marker)
-                                } else {
-                                    // 이미 현재 마커에 정보 창이 열려있을 경우 닫음
-                                    infoWindow.close()
-                                }
-                                true
-                            }
-
-                            marker.captionText = it[i].name
-                            marker.map = map
-                            markerPositions.add(marker)
-                        }
-                    }
-                }
-            } catch (ex: Exception) {
-                Toast.makeText(context, "반경 1km이내에 검색결과가 존재하지 않습니다!", Toast.LENGTH_SHORT).show()
+                idx++
             }
 
-                     */
+            // TODO 마커 추가하고 나중에 삭제는
+            handler.post{
+                // 메인스레드
+                markers.forEach { marker ->
+                    marker.map = map
+                }
+            }
+
 
         }
-
     }
 
     @SuppressLint("MissingPermission")
@@ -573,22 +518,17 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
         destMarker.zIndex = 111
         destMarker.icon = MarkerIcons.BLACK
         destMarker.iconTintColor = Color.parseColor("#FA295B")
+        destMarker.width = 100
+        destMarker.height = 125
         destMarker.position = LatLng(destLocation.latitude, destLocation.longitude)
 
-
-        if (map != null) {
+        if (map != null)
+        {
             destMarker.map = map
         }
 
         map?.cameraPosition =
             CameraPosition(LatLng(destLocation.latitude, destLocation.longitude), 15.0)
-
-        map?.setOnMapTwoFingerTapListener { pointF, latLng ->
-
-            Toast.makeText(requireContext(), "${pointF.x}, ${pointF.y}", Toast.LENGTH_SHORT).show()
-
-            false // true하면 지도 확대/축소 안됨
-        }
     }
 
     @SuppressLint("MissingPermission")

@@ -24,7 +24,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class MapLocationSettingActivity : BaseActivity<MapLocationSettingViewModel, ActivityMapLocationSettingBinding>(){
 
-    var isCurAddressNull = false
+    var isCurAddressNull = true
     private lateinit var tMapView: TMapView
     private lateinit var tMapData: TMapData
 
@@ -49,9 +49,15 @@ class MapLocationSettingActivity : BaseActivity<MapLocationSettingViewModel, Act
         initMap()
 
         binding.btnSetCurLocation.setOnClickListener {
+            
+            // 처음 들어와서 바로 설정버튼 누르면 에러
+
+            // 이전 위치와 다른 경우에만 finish(). 같으면 아직 viewModel 갱신이 안된 상태이기 때문에 ㄱㄷ이라고 토스트
+            // 먼저 지도 위치를 드래그 해서 이동시키는 즉시 isCurAddressNull = true
+            
+            // 로딩 이미지를 출력해서 지도 이동해서 갱신중일때 터치 막기
 
             if(!isCurAddressNull) {
-                Toast.makeText(this@MapLocationSettingActivity, "설정완료! " + viewModel.getMapSearchInfo()?.fullAddress, Toast.LENGTH_SHORT).show()
 
                 val entity = viewModel.getMapSearchInfo()
 
@@ -59,9 +65,10 @@ class MapLocationSettingActivity : BaseActivity<MapLocationSettingViewModel, Act
                 intent.putExtra("result", entity)
 
                 setResult(Activity.RESULT_OK, intent);
+                Toast.makeText(this@MapLocationSettingActivity, "설정완료!", Toast.LENGTH_SHORT).show()
                 finish()
             } else {
-                Toast.makeText(this@MapLocationSettingActivity, "에러", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MapLocationSettingActivity, "위치를 드래그해서 갱신해주세요!", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -104,7 +111,7 @@ class MapLocationSettingActivity : BaseActivity<MapLocationSettingViewModel, Act
 
         tMapView.setOnDisableScrollWithZoomLevelListener { fl, tMapPoint ->
 
-
+            isCurAddressNull = true
 
             val job = viewModel.getReverseGeoInformation(LocationLatLngEntity(tMapPoint.latitude, tMapPoint.longitude))
 
@@ -125,7 +132,6 @@ class MapLocationSettingActivity : BaseActivity<MapLocationSettingViewModel, Act
 
         tMapView.setLocationPoint(curLocation!!.longitude, curLocation!!.latitude)
         tMapView.setCenterPoint(curLocation!!.longitude, curLocation!!.latitude)
-
     }
 
     override fun observeData() = with(viewModel) {
@@ -133,6 +139,7 @@ class MapLocationSettingActivity : BaseActivity<MapLocationSettingViewModel, Act
             when (it) {
                 is MapLocationSettingState.Success -> {
                     binding.tvCurAddress.text = it.mapSearchInfoEntity.fullAddress
+                    isCurAddressNull = false
                 }
             }
         }
