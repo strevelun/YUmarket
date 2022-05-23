@@ -57,8 +57,6 @@ class MainActivity
             }
         }
 
-
-
     private lateinit var locationManager: LocationManager
     private lateinit var myLocationListener: MyLocationListener
 

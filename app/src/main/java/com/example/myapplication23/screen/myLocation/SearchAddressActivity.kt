@@ -18,11 +18,18 @@ import com.example.myapplication23.R
 import com.example.myapplication23.databinding.ActivityMyLocationBinding
 import com.example.myapplication23.databinding.ActivitySearchAddressBinding
 import com.example.myapplication23.screen.home.HomeViewModel
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
+import java.net.URLEncoder
+import java.nio.charset.Charset
 
 class SearchAddressActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySearchAddressBinding
 
     private val handler = Handler()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,22 +50,22 @@ class SearchAddressActivity : AppCompatActivity() {
             webViewClient = client
             addJavascriptInterface(AndroidBridge(), "TestApp")
             webChromeClient = chromeClient
-            
-            // 스터디방에서만 가능
-            loadUrl("http://180.189.88.41:80/search.php")
+
+            loadUrl("http://3.38.211.77/search.php")
         }
     }
 
-    private inner class AndroidBridge {
+    // TODO : search.php에서 arg1 매개변수 안넣게 하기
+    private inner class AndroidBridge { // 웹에서 JavaScript로 android 함수를 호출할 수 있도록 도와줌
         @JavascriptInterface
-        open fun setAddress(arg1: String?, arg2: String?, arg3: String?) {
+        open fun setAddress(arg1: String?, arg2: String?, arg3: String?) { // search.php에서 호출되는 함수
             handler.post {
                 setResult(
                     Activity.RESULT_OK,
                     Intent().apply {
                         putExtra(
                             HomeViewModel.MY_LOCATION_KEY,
-                            String.format("(%s) %s %s", arg1, arg2, arg3),
+                            String.format("%s %s", arg2, arg3),
                         )
                     },
                 )
@@ -67,11 +74,13 @@ class SearchAddressActivity : AppCompatActivity() {
         }
     }
 
+    // TODO : 제거?
     private val client: WebViewClient = object : WebViewClient() {
         override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
             return false
         }
 
+        // TODO : 제거?
         override fun onReceivedSslError(view: WebView?, handler: SslErrorHandler?, error: SslError?) {
             handler?.proceed()
         }
@@ -91,7 +100,7 @@ class SearchAddressActivity : AppCompatActivity() {
                     super.onJsAlert(view, url, message, result)
 
                     // 선택한 주소 출력
-                    Toast.makeText(this@SearchAddressActivity, result.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SearchAddressActivity, "결과 : " + result.toString(), Toast.LENGTH_SHORT).show()
 
                     return true
                 }

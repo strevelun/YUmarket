@@ -45,6 +45,7 @@
         />
 
     <TextView
+        android:id="@+id/recentAddr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="최근 주소"
@@ -56,6 +57,26 @@
         android:textColor="@color/black"
         />
 
-    
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="전체 삭제"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/recentAddr"
+        android:layout_marginEnd="30dp"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_recentAddr"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="30dp"
+        android:scrollbarFadeDuration="0"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recentAddr"
+        tools:listitem="@layout/recycler_recent_addr_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

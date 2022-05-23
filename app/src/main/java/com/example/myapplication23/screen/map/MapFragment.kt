@@ -34,6 +34,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.example.myapplication23.data.db.dao.AddressHistoryDao
 import com.example.myapplication23.data.entity.location.MapSearchInfoEntity
 import com.example.myapplication23.model.map.MapItemModel
 import com.example.myapplication23.model.map.MapStoreModel
@@ -44,6 +45,7 @@ import com.example.myapplication23.widget.adapter.listener.map.MapItemListAdapte
 import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.OverlayImage
 import kotlinx.android.extensions.LayoutContainer
+import org.koin.android.ext.android.inject
 import java.lang.Math.round
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
@@ -87,8 +89,7 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
     private lateinit var nMapView: MapView
     private var map: NaverMap? = null
     private lateinit var destMarker: Marker
-    private lateinit var locationSource: FusedLocationSource
-    private lateinit var geocoder: Geocoder
+    private lateinit var locationSource: FusedLocationSource // Google Play 서비스의 Fused Location Provider를 사용하는 LocationSource 구현체.
     private var infoWindow : InfoWindow? = null
 
     private lateinit var locationManager: LocationManager
@@ -577,9 +578,12 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
         try {
             map.cameraPosition =
                 CameraPosition(LatLng(curLocation.latitude, curLocation.longitude), 15.0)
+            destLocation = LocationLatLngEntity(curLocation.latitude, curLocation.longitude)
+            updateLocation(destLocation)
+
         }catch(ex : Exception){
             Toast.makeText(context, "위치 초기화 중", Toast.LENGTH_SHORT).show()
         }
-    }
 
+    }
 }

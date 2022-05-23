@@ -29,6 +29,9 @@
         <entry key="..\:/Users/StrangeCake/AndroidStudioProjects/MyApplication23/app/src/main/res/layout/fragment_restaurant_list.xml" value="0.264" />
         <entry key="..\:/Users/StrangeCake/AndroidStudioProjects/MyApplication23/app/src/main/res/layout/viewholder_restaurant.xml" value="0.4" />
         <entry key="..\:/Users/StrangeCake/AndroidStudioProjects/MyApplication23/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.4" />
+        <entry key="..\:/Users/fere1/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/activity_list_item.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/fere1/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_expandable_list_item_1.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/fere1/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_expandable_list_item_2.xml" value="0.22916666666666666" />
         <entry key="..\:/Users/fere1/Desktop/MyApplication23-3/app/src/main/res/layout/activity_main.xml" value="0.14221014492753623" />
         <entry key="..\:/Users/fere1/Desktop/MyApplication23-3/app/src/main/res/layout/fragment_home.xml" value="0.225" />
         <entry key="..\:/Users/fere1/Desktop/MyApplication23-3/app/src/main/res/layout/fragment_map.xml" value="0.14221014492753623" />
@@ -59,9 +62,18 @@
         <entry key="..\:/Users/fere1/Desktop/programs/MyApplication23-3/app/src/main/res/layout/viewholder_map_viewpager.xml" value="0.4" />
         <entry key="..\:/Users/fere1/Desktop/programs/MyApplication23-3/app/src/main/res/layout/viewholder_restaurant.xml" value="0.4" />
         <entry key="..\:/Users/fere1/Desktop/programs/MyApplication23-3/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/fere1/StudioProjects/YUmarket/app/src/main/res/layout/activity_map_product_info.xml" value="0.17708333333333334" />
+        <entry key="..\:/Users/fere1/StudioProjects/YUmarket/app/src/main/res/layout/activity_home_market_detail.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/fere1/StudioProjects/YUmarket/app/src/main/res/layout/activity_map_location_setting.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/fere1/StudioProjects/YUmarket/app/src/main/res/layout/activity_map_product_info.xml" value="0.2" />
+        <entry key="..\:/Users/fere1/StudioProjects/YUmarket/app/src/main/res/layout/activity_my_location.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/fere1/StudioProjects/YUmarket/app/src/main/res/layout/activity_search_address.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/fere1/StudioProjects/YUmarket/app/src/main/res/layout/dialog_filter.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/fere1/StudioProjects/YUmarket/app/src/main/res/layout/fragment_map.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/fere1/StudioProjects/YUmarket/app/src/main/res/layout/fragment_restaurant_list.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/fere1/StudioProjects/YUmarket/app/src/main/res/layout/recycler_recent_addr_item.xml" value="0.27578947368421053" />
+        <entry key="..\:/Users/fere1/StudioProjects/YUmarket/app/src/main/res/layout/recycler_review_item.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/fere1/StudioProjects/YUmarket/app/src/main/res/layout/viewholder_map_viewpager.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/fere1/StudioProjects/YUmarket/app/src/main/res/layout/viewholder_restaurant.xml" value="0.25364583333333335" />
       </map>
     </option>
   </component>

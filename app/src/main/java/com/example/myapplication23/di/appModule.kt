@@ -17,6 +17,7 @@ import com.example.myapplication23.screen.myinfo.MyInfoViewModel
 import com.example.myapplication23.screen.orderlist.OrderListViewModel
 import com.example.YUmarket.util.provider.DefaultResourcesProvider
 import com.example.YUmarket.util.provider.ResourcesProvider
+import com.example.myapplication23.data.db.YUMarketDB
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
@@ -51,4 +52,6 @@ val appModule = module {
 
     single { Dispatchers.IO }
 
+    single { provideDatabase(androidContext()) }
+    single { provideAddressHistoryDao(get()) }
 }

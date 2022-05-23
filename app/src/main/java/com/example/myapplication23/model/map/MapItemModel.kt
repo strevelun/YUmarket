@@ -18,7 +18,4 @@ data class MapItemModel(
     val itemImageUrl: String,
     // 소속 가게
     override val type: CellType = CellType.MAP_ITEM_CELL,
-    ): Model(id, type), Parcelable {
-
-
-}
+    ): Model(id, type), Parcelable

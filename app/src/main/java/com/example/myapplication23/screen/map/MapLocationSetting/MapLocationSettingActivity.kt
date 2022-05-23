@@ -26,9 +26,6 @@ class MapLocationSettingActivity : BaseActivity<MapLocationSettingViewModel, Act
 
     var isCurAddressNull = true
     private lateinit var tMapView: TMapView
-    private lateinit var tMapData: TMapData
-
-    private lateinit var tMapPoint : TMapPoint
 
     override val viewModel by viewModel<MapLocationSettingViewModel>()
     private val mainViewModel by viewModel<MainViewModel>()
