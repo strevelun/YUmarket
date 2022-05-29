@@ -186,13 +186,11 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
     override fun onStart() {
         super.onStart()
 
-        if (!isFragmentInitialized) {
-            locationSource = FusedLocationSource(this@MapFragment, LOCATION_PERMISSION_REQUEST_CODE)
-            initMap()
-            initDialog()
-            initViewPager()
-            isFragmentInitialized = true
-        }
+        locationSource = FusedLocationSource(this@MapFragment, LOCATION_PERMISSION_REQUEST_CODE)
+        initMap()
+        initDialog()
+        initViewPager()
+        //isFragmentInitialized = true
     }
 
     private fun initDialog() {
@@ -325,6 +323,15 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
     override fun initViews() {
         super.initViews()
 
+        binding.btnCloseMarkers.setOnClickListener {
+            markers.forEach { marker ->
+                marker.map = null
+            }
+            binding.viewPager2.visibility = View.GONE
+            binding.fbtnCloseViewPager.visibility = View.GONE
+            infoWindow?.close()
+            binding.btnCloseMarkers.visibility = View.GONE
+        }
 
         binding.btnCurLocation.setOnClickListener {
             try {
@@ -383,6 +390,8 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
             지도에 추가하는 작업만을 메인 스레드에서 수행하면 메인 스레드를 효율적으로 사용할 수 있습니다.
             다음은 1000개의 마커를 백그라운드 스레드에서 생성하고 속성을 지정한 후 메인 스레드에서 지도에 추가하는 예제입니다.
         */
+
+            binding.btnCloseMarkers.visibility = View.VISIBLE
 
             searchAround()
         }
@@ -486,7 +495,6 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
 
                 idx++
             }
-
             // TODO 마커 추가하고 나중에 삭제는
             handler.post{
                 // 메인스레드
@@ -494,8 +502,6 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
                     marker.map = map
                 }
             }
-
-
         }
     }
 
@@ -524,9 +530,7 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
         destMarker.position = LatLng(destLocation.latitude, destLocation.longitude)
 
         if (map != null)
-        {
             destMarker.map = map
-        }
 
         map?.cameraPosition =
             CameraPosition(LatLng(destLocation.latitude, destLocation.longitude), 15.0)
@@ -576,14 +580,13 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
         map.uiSettings.isCompassEnabled = true
 
         try {
-            map.cameraPosition =
-                CameraPosition(LatLng(curLocation.latitude, curLocation.longitude), 15.0)
-            destLocation = LocationLatLngEntity(curLocation.latitude, curLocation.longitude)
             updateLocation(destLocation)
+
+            map.cameraPosition =
+                CameraPosition(LatLng(destLocation.latitude, destLocation.longitude), 15.0)
 
         }catch(ex : Exception){
             Toast.makeText(context, "위치 초기화 중", Toast.LENGTH_SHORT).show()
         }
-
     }
 }

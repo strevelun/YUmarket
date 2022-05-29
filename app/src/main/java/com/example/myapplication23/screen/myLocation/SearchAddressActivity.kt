@@ -51,7 +51,7 @@ class SearchAddressActivity : AppCompatActivity() {
             addJavascriptInterface(AndroidBridge(), "TestApp")
             webChromeClient = chromeClient
 
-            loadUrl("http://3.38.211.77/search.php")
+            loadUrl("http://3.34.141.236/search.php")
         }
     }
 
