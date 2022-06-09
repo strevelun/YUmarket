@@ -1,9 +1,16 @@
 package com.example.myapplication23.screen.map.MapLocationSetting
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import com.example.myapplication23.data.entity.location.LocationLatLngEntity
 import com.example.myapplication23.data.entity.location.MapSearchInfoEntity
 import com.example.myapplication23.databinding.ActivityMapLocationSettingBinding
@@ -29,6 +36,10 @@ class MapLocationSettingActivity : BaseActivity<MapLocationSettingViewModel, Act
 
     override val viewModel by viewModel<MapLocationSettingViewModel>()
     private val mainViewModel by viewModel<MainViewModel>()
+
+    private lateinit var locationManager: LocationManager
+    private lateinit var locationListener: LocationListener
+    private lateinit var cur: Location
 
     override fun getViewBinding() = ActivityMapLocationSettingBinding.inflate(layoutInflater)
 
@@ -78,31 +89,39 @@ class MapLocationSettingActivity : BaseActivity<MapLocationSettingViewModel, Act
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun initMap() = with(binding) {
         val tmapLayout = TMap
         tMapView = TMapView(applicationContext)
         tMapView.setSKTMapApiKey("l7xx47edb2787b5040fc8e004c19e85c0053")
         tmapLayout.addView(tMapView)
 
-        val entity = intent.getParcelableExtra<MapSearchInfoEntity>(HomeViewModel.MY_LOCATION_KEY)
+        locationManager = applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
+        locationListener = LocationListener { l ->
+            cur = l
+            cur.longitude = l.longitude
+            cur.latitude = l.latitude
+        }
+
+        locationManager.requestLocationUpdates(
+            LocationManager.GPS_PROVIDER,
+            1000,
+            1f,
+            locationListener
+        )
+        locationManager.requestLocationUpdates(
+            LocationManager.NETWORK_PROVIDER,
+            1000,
+            1f,
+            locationListener
+        )
+
+        val entity = intent.getParcelableExtra<MapSearchInfoEntity>(HomeViewModel.MY_LOCATION_KEY)
 
         // 화면을 이동하면서 화면 중앙에 해당하는 실제 좌표 위치를 tMapPoint에 계속 저장함
         // 뒤로가기를 하면 그냥 뷰모델에 반영없이 뒤로가기 하는거고
         // 이 위치로 주소설정을 하면 뷰모델에 반영
-
-        //val lon = mainViewModel.getMapSearchInfo()?.locationLatLng!!.longitude
-        //val lat = mainViewModel.getMapSearchInfo()?.locationLatLng!!.latitude
-
-
-        //viewModel.getReverseGeoInformation(LocationLatLngEntity(lat, lon))
-
-        //val t = viewModel.getMapSearchInfo()
-
-        //if(t != null)
-          //  viewModel.MapLocationSettingStateLiveData.value = MapLocationSettingState.Success(
-            //    t
-            //)
 
         binding.tvCurAddress.text = entity?.fullAddress ?: "정보없음"
 
@@ -124,10 +143,9 @@ class MapLocationSettingActivity : BaseActivity<MapLocationSettingViewModel, Act
             }
         }
 
-
         val curLocation = mainViewModel.getMapSearchInfo()?.locationLatLng
 
-        tMapView.setLocationPoint(curLocation!!.longitude, curLocation!!.latitude)
+        tMapView.setLocationPoint(curLocation!!.longitude, curLocation!!.latitude) // 현재 내위치 아니라 목적지임
         tMapView.setCenterPoint(curLocation!!.longitude, curLocation!!.latitude)
     }
 

@@ -234,7 +234,7 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
             }
         }
 
-        chkVisit = layout.findViewById(R.id.visit)
+        //chkVisit = layout.findViewById(R.id.visit)
         //filterCategoryOptions.add(chkVisit.isChecked)
         switchShowOnSale = layout.findViewById(R.id.switch_only_on_sale)
         //filterCategoryOptions.add(switchShowOnSale.isChecked)
@@ -271,6 +271,7 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
 
             for(item in filterCategoryOptions)
                 if(item.isChecked) {
+                    Toast.makeText(context, item.text, Toast.LENGTH_SHORT).show()
                     noChk = false
                     break
                 }
@@ -540,7 +541,7 @@ class MapFragment : BaseFragment<MapViewModel, FragmentMapBinding>(), OnMapReady
     private fun initMap() = with(binding) {
 
         nMapView = mapView
-        nMapView.getMapAsync(this@MapFragment)
+       nMapView.getMapAsync(this@MapFragment)
 
         locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
